@@ -1,6 +1,3 @@
-
-
-
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Spinner from './spinner/Spinner';
@@ -11,18 +8,22 @@ function ProductList() {
   const dispatch = useDispatch();
   const { data, loading } = useSelector((state) => state.products);
   const selectedCategories = useSelector((state) => state.filters.selectedCategories);
+  const sortOption = useSelector((state) => state.filters.sortOption);
 
   useEffect(() => {
-    dispatch(fetchProducts(selectedCategories));
-  }, [dispatch, selectedCategories]);
+    dispatch(fetchProducts({ categories: selectedCategories, sort: sortOption }));
+  }, [dispatch, selectedCategories, sortOption]);
 
-  // console.log(data)
+  useEffect(() => {
+    console.log(data);  // Debugging line to check the fetched data
+  }, [data]);
+
   return (
     <div className="w-full">
       {!loading ? (
         <div className="flex flex-wrap gap-6">
           {data.length > 0 ? (
-            data?.map((item, index) => <ProductCard key={index} data={item} />)
+            data.map((item, index) => <ProductCard key={index} data={item} />)
           ) : (
             <h1 className="text-2xl">Sorry, Results not found!</h1>
           )}
@@ -37,6 +38,3 @@ function ProductList() {
 }
 
 export default ProductList;
-
-
-

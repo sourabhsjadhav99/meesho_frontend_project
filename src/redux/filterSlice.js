@@ -88,6 +88,7 @@ const filterSlice = createSlice({
     },
   },
 });
+// console.log(filterSlice.setSortOption)
 
 export const { toggleCategory, clearAllCategories, setSortOption,  toggleRatings, togglePrices } = filterSlice.actions;
 

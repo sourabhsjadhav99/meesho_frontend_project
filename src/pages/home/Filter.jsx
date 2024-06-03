@@ -159,7 +159,7 @@ function Filter() {
                   ? "bg-pink-100"
                   : "hover:bg-[#F8F8FF]"
               }`}
-              onClick={() => handleSortChange("Price(High to low)")}
+              onClick={() => handleSortChange("Price (High to low)")}
             >
               Price(High to low)
             </button>
