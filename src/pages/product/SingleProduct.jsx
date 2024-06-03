@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { RxDoubleArrowRight } from "react-icons/rx";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import { FaRupeeSign } from "react-icons/fa";
 import { FaStar } from "react-icons/fa6";
@@ -14,12 +14,12 @@ function SingleProduct() {
   const { data, loading } = useFetch(`/products/${id}`);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [clickedIndex, setClickedIndex] = useState(0);
-    const dispatch = useDispatch();
+  let navigate = useNavigate()
+  const dispatch = useDispatch();
   const handleAddToCart = () => {
-
     dispatch(addToCart(data));
+    navigate("/cart")
   };
-
 
   return (
     <div className="flex justify-center my-10 ">
@@ -151,7 +151,10 @@ function SingleProduct() {
               </div>
               {data?.reviews?.map((review, index) => {
                 return (
-                  <div className="border rounded p-2 my-2 text-[#8B8BA3] font-semibold" key={index}>
+                  <div
+                    className="border rounded p-2 my-2 text-[#8B8BA3] font-semibold"
+                    key={index}
+                  >
                     <p>Reviewer Name: {review.reviewerName}</p>
                     <p>Reviewer Email: {review.reviewerEmail}</p>
 

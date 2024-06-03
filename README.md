@@ -1,2 +1,1 @@
-# meesho_frontend_project
-meesho_frontend_project
+# meesho_clone
