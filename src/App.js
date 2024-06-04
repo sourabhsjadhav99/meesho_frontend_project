@@ -17,7 +17,6 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/:id" element={<SingleProduct />} />
-        <Route path="/address" element={<AddressForm />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/summary" element={<Summary />} />
 
