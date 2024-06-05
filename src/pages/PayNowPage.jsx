@@ -1,69 +1,131 @@
+
+
 // import React, { useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 // import { FaRupeeSign } from "react-icons/fa";
 // import {
 //   increaseQuantity,
 //   decreaseQuantity,
-//   removeFromCart,
-// } from "../../redux/cartSlice";
+// } from "../redux/cartSlice";
 // import { useNavigate } from "react-router-dom";
-// import { RxCross2 } from "react-icons/rx";
-// import { AiOutlineShoppingCart } from "react-icons/ai";
-// import Img from "../../components/Img";
-// import continueShoppingImg from "../../assets/continue_shopping.png";
-// import safetyImg from "../../assets/safety.png";
-// import AddressForm from "./AddressForm";
-// import "./CartPage.css"; // Import the CSS file
 
-// function CartPage() {
+// import Img from "../components/Img";
+
+// import safetyImg from "../assets/safety.png";
+// import AddressForm from "../pages/cart/AddressForm";
+// import "./cart/./CartPage.css"; // Import the CSS file
+
+// function PayNowPage() {
 //   const dispatch = useDispatch();
-//   const cartItems = useSelector((state) => state.cart.items);
+//   const buyNow = useSelector((state) => state.cart.buyNowItem);
 //   const [editingItemId, setEditingItemId] = useState(null);
 //   const navigate = useNavigate();
 //   const [isOpen, setIsOpen] = useState(false);
-//   console.log("key is" + process.env.RAZORPAY_KEY);
+
 //   const handleIncreaseQuantity = (id) => {
 //     dispatch(increaseQuantity(id));
 //   };
 
 //   const handleDecreaseQuantity = (id) => {
-//     const item = cartItems.find((item) => item.id === id);
+//     const item = buyNow.find((item) => item.id === id);
 //     if (item.quantity > 1) {
 //       dispatch(decreaseQuantity(id));
-//     } else {
-//       if (window.confirm("Do you want to remove this product from the cart?")) {
-//         dispatch(removeFromCart(id));
-//       }
-//     }
+//     } 
 //   };
 
-//   const handleRemoveFromCart = (id) => {
-//     if (window.confirm("Do you want to remove this product from the cart?")) {
-//       dispatch(removeFromCart(id));
-//     }
-//   };
+
 
 //   const handleEditClick = (id) => {
 //     setEditingItemId(id);
 //   };
 
-//   const handleStartShopping = () => {
-//     navigate("/");
-//   };
 
-//   const totalCost = cartItems.reduce(
+
+//   const totalCost = buyNow.reduce(
 //     (total, item) => total + item.price * item.quantity * 50,
 //     0
 //   );
 
-//   console.log(totalCost)
 //   const toggleSidebar = () => {
 //     setIsOpen(!isOpen);
 //   };
 
+//   const handleAddressSubmit = () => {
+//     const address = JSON.parse(localStorage.getItem("address"));
+//     if (address) {
+//       handlePayment();
+//     } else {
+//       alert("Address information is missing.");
+//       navigate("/address");
+//     }
+//   };
+
+//   const handlePayment = async () => {
+//     const loadScript = (src) => {
+//       return new Promise((resolve, reject) => {
+//         const script = document.createElement("script");
+//         script.src = src;
+//         script.onload = () => {
+//           resolve(true);
+//         };
+//         script.onerror = () => {
+//           reject(new Error("Razorpay SDK failed to load."));
+//         };
+//         document.body.appendChild(script);
+//       });
+//     };
+
+//     try {
+//       const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
+
+//       if (!res) {
+//         alert("Razorpay SDK failed to load. Are you online?");
+//         return;
+//       }
+
+//       const address = JSON.parse(localStorage.getItem("address"));
+//       const options = {
+//         key: process.env.REACT_APP_RAZORPAY_KEY,
+//         amount: parseInt(totalCost) * 100, // Amount in paise
+//         currency: "INR",
+//         name: "Meesho",
+//         description: "Test Transaction",
+//         image: "path/to/meesho_logo.png", // Add your logo here
+//         handler: function (response) {
+//           console.log("Payment Success:", response);
+//           alert(`Payment successful! Payment ID: ${response.razorpay_payment_id}`);
+//           navigate("/summary"); // Redirect to a success page
+//         },
+//         prefill: {
+//           name: address.name,
+//           contact: address.mobile,
+//         },
+//         notes: {
+//           address: `${address.house}, ${address.road}, ${address.city}, ${address.state}, ${address.pincode}`,
+//         },
+//         theme: {
+//           color: "#9f2089",
+//         },
+//       };
+
+//       const paymentObject = new window.Razorpay(options);
+//       paymentObject.on("payment.failed", function (response) {
+//         console.error("Payment Failed:", response.error);
+//         alert(`Payment failed! Reason: ${response.error.reason}`);
+//         console.log("Navigating back to previous page...");
+//         navigate(-1);
+//       });
+
+//       paymentObject.open();
+//     } catch (error) {
+//       console.error("Error in handlePayment:", error);
+//       alert(error.message);
+//     }
+//   };
+
 //   return (
 //     <div className="flex justify-center w-[100%] relative">
-//       {cartItems.length > 0 ? (
+//       {buyNow.length > 0 && 
 //         <div className={`w-[60%] `}>
 //           <div
 //             className={`flex justify-center w-[100%] gap-8 content-wrapper ${
@@ -73,13 +135,13 @@
 //             <div className="w-[60%]">
 //               <div className="flex flex-col gap-3">
 //                 <h3 className="text-xl font-semibold">Product Details</h3>
-//                 {cartItems.map((item) => (
+//                 {buyNow.map((item) => (
 //                   <div key={item.id} className="border-2 rounded-lg">
 //                     <div className="flex justify-between p-4 ">
 //                       <div className="w-[60px] h-[60px] border-2 rounded-md">
 //                         <Img
 //                           src={item.images[0]}
-//                           className="object-contain rounded"
+//                           className="object-contain rounded w-[60px] h-[60px]"
 //                         />
 //                       </div>
 //                       <div className="flex flex-col w-[70%]">
@@ -139,19 +201,15 @@
 //                             </div>
 //                           )}
 //                         </div>
-//                         <div>
-//                           <button
-//                             className="flex items-center font-bold "
-//                             onClick={() => handleRemoveFromCart(item.id)}
-//                           >
-//                             <RxCross2 /> REMOVE
-//                           </button>
-//                         </div>
+                  
 //                       </div>
 //                       <div className="">
 //                         <button
 //                           className="text-[#9F2089] font-bold"
-//                           onClick={() => handleEditClick(item.id)}
+//                           onClick={() => {
+//                             toggleEditSidebar();
+//                             handleEditClick(item.id);
+//                           }}
 //                         >
 //                           EDIT
 //                         </button>
@@ -202,75 +260,55 @@
 //               </div>
 //             </div>
 //           </div>
-//           <AddressForm isOpen={isOpen} toggleSidebar={toggleSidebar} />
+//           <AddressForm
+//             isOpen={isOpen}
+//             toggleSidebar={toggleSidebar}
+//             onSave={handleAddressSubmit}
+//           />
+//                <EditSideBar
+//             isOpenEdit={isOpenEdit}
+//             toggleEditSidebar={toggleEditSidebar}
+//             editingItemId={editingItemId}
+//             setEditingItemId={setEditingItemId}
+//           />
 //         </div>
-//       ) : (
-//         <div className="w-[30%] h-screen flex flex-col justify-center items-center gap-3">
-//           <div className="w-[100%] px-[25%]">
-//             <Img src={continueShoppingImg} className="w-[100%]" />
-//           </div>
-//           <p className="font-semibold">Your cart is empty</p>
-//           <p>Just relax, let us help you find some first-class products</p>
-//           <button
-//             className="flex items-center w-[50%] justify-center font-bold bg-[#9f2089] p-2 text-white rounded-md"
-//             onClick={handleStartShopping}
-//           >
-//             Start Shopping
-//           </button>
-//         </div>
-//       )}
+//     }
 //     </div>
 //   );
 // }
 
-// export default CartPage;
+// export default PayNowPage;
 
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FaRupeeSign } from "react-icons/fa";
-import {
-  increaseQuantity,
-  decreaseQuantity,
-  removeFromCart,
-} from "../../redux/cartSlice";
+import { increaseQuantity, decreaseQuantity } from "../redux/cartSlice";
 import { useNavigate } from "react-router-dom";
-import { RxCross2 } from "react-icons/rx";
-import { AiOutlineShoppingCart } from "react-icons/ai";
-import Img from "../../components/Img";
-import continueShoppingImg from "../../assets/continue_shopping.png";
-import safetyImg from "../../assets/safety.png";
-import AddressForm from "./AddressForm";
-import "./CartPage.css"; // Import the CSS file
-import EditSideBar from "../../components/EditSidebar";
 
-function CartPage() {
+import Img from "../components/Img";
+
+import safetyImg from "../assets/safety.png";
+import AddressForm from "../pages/cart/AddressForm";
+import "./cart/./CartPage.css"; // Import the CSS file
+import EditSideBar from "../components/EditSidebar";
+
+function PayNowPage() {
   const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.cart.items);
+  const buyNow = useSelector((state) => state.cart.buyNowItem);
   const [editingItemId, setEditingItemId] = useState(null);
   const navigate = useNavigate();
   const [isOpenAddress, setIsOpenAddress] = useState(false);
   const [isOpenEdit, setIsOpenEdit] = useState(false);
-  const [editCart, setEditCart] = useState(false);
 
-  const handleRemoveFromCart = (id) => {
-    if (window.confirm("Do you want to remove this product from the cart?")) {
-      dispatch(removeFromCart(id));
-    }
-  };
-
+  let buyNowFirst= buyNow.slice(-1)
   const handleEditClick = (id) => {
     setEditingItemId(id);
   };
 
-  const handleStartShopping = () => {
-    navigate("/");
-  };
-
-  const totalCost = cartItems.reduce(
-    (total, item) => total + parseInt(item.price * 50) * item.quantity,
+  const totalCost = buyNowFirst.reduce(
+    (total, item) => total + item.price * item.quantity * 50,
     0
   );
-
   const toggleAddressSidebar = () => {
     setIsOpenAddress(!isOpenAddress);
   };
@@ -357,18 +395,18 @@ function CartPage() {
 
   return (
     <div className="flex justify-center w-[100%] relative">
-      {cartItems.length > 0 ? (
+      {buyNowFirst.length > 0 && (
         <div className={`w-[60%] `}>
           <div
             className={`flex justify-center w-[100%] gap-8 content-wrapper ${
-              isOpenAddress || isOpenEdit ? "blurred" : ""
+                isOpenAddress || isOpenEdit ? "blurred" : ""
             }`}
           >
             <div className="w-[60%]">
               <div className="flex flex-col gap-3">
                 <h3 className="text-xl font-semibold">Product Details</h3>
-                {cartItems.map((item) => (
-                  <div key={item.id} className=" border-2 rounded-lg">
+                {buyNowFirst.map((item) => (
+                  <div key={item.id} className="border-2 rounded-lg">
                     <div className="flex justify-between p-4 ">
                       <div className="w-[60px] h-[60px] border-2 rounded-md">
                         <Img
@@ -400,20 +438,16 @@ function CartPage() {
                           </small>
                         </div>
                         <div>
-                          <div>
-                            <p>
-                              Quantity:
-                              <span className="font-bold">{item.quantity}</span>
-                            </p>
-                          </div>
-                        </div>
-                        <div>
-                          <button
-                            className="flex items-center font-bold "
-                            onClick={() => handleRemoveFromCart(item.id)}
-                          >
-                            <RxCross2 /> REMOVE
-                          </button>
+        
+                            <div>
+                              <p>
+                                Quantity:
+                                <span className="font-bold">
+                                  {item.quantity}
+                                </span>
+                              </p>
+                            </div>
+                         
                         </div>
                       </div>
                       <div className="">
@@ -422,7 +456,6 @@ function CartPage() {
                           onClick={() => {
                             toggleEditSidebar();
                             handleEditClick(item.id);
-                            setEditCart(true)
                           }}
                         >
                           EDIT
@@ -484,26 +517,12 @@ function CartPage() {
             toggleEditSidebar={toggleEditSidebar}
             editingItemId={editingItemId}
             setEditingItemId={setEditingItemId}
-            editCart={editCart}
           />
-        </div>
-      ) : (
-        <div className="w-[30%] h-screen flex flex-col justify-center items-center gap-3">
-          <div className="w-[100%] px-[25%]">
-            <Img src={continueShoppingImg} className="w-[100%]" />
-          </div>
-          <p className="font-semibold">Your cart is empty</p>
-          <p>Just relax, let us help you find some first-class products</p>
-          <button
-            className="flex items-center w-[50%] justify-center font-bold bg-[#9f2089] p-2 text-white rounded-md"
-            onClick={handleStartShopping}
-          >
-            Start Shopping
-          </button>
         </div>
       )}
     </div>
   );
 }
 
-export default CartPage;
+export default PayNowPage;
+

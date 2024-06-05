@@ -9,7 +9,7 @@ function ProductCard({ data, loading }) {
 
   return (
     <>
-      {!loading ? (
+      {!loading && (
         <div
           className="flex flex-col justify-between w-[230px] h-[400px] rounded border"
           onClick={() => navigate(`/${data?.id}`)}
@@ -20,7 +20,7 @@ function ProductCard({ data, loading }) {
               src={`${data?.images[0]}`}
             />
 
-            <small className="bg-[#F8F8FF] p-1 absolute bottom-0 left-[166px] rounded-tl-lg">
+            <small className="bg-[#F8F8FF] p-1 absolute bottom-0 left-[171px] rounded-tl-lg">
               +5 more
             </small>
           </div>
@@ -74,8 +74,6 @@ function ProductCard({ data, loading }) {
             </div>
           </div>
         </div>
-      ) : (
-        <div>Loading.........</div>
       )}
     </>
   );

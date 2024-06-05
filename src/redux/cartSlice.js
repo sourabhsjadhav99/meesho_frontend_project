@@ -68,6 +68,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   items: [],
+  buyNowItem: []
 };
 
 const cartSlice = createSlice({
@@ -97,10 +98,26 @@ const cartSlice = createSlice({
         item.quantity -= 1;
       }
     },
+    buyNow: (state, action) => {
+        state.buyNowItem.push({ ...action.payload, quantity: 1 });
+      
+    },
+    increaseBuyQuantity: (state, action) => {
+      const item = state.buyNowItem.find(item => item.id === action.payload);
+      if (item) {
+        item.quantity += 1;
+      }
+    },
+    decreaseBuyQuantity: (state, action) => {
+      const item = state.buyNowItem.find(item => item.id === action.payload);
+      if (item && item.quantity > 1) {
+        item.quantity -= 1;
+      }
+    },
   },
 });
 
-export const { addToCart, removeFromCart, increaseQuantity, decreaseQuantity } = cartSlice.actions;
+export const { addToCart, removeFromCart, increaseQuantity, decreaseQuantity, buyNow, increaseBuyQuantity, decreaseBuyQuantity } = cartSlice.actions;
 
 export default cartSlice.reducer;
 

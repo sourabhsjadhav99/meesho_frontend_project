@@ -9,8 +9,8 @@ function Home() {
   return (
     <div className="">
     
-      {/* <Cover />
-      <Categories /> */}
+      <Cover />
+      <Categories />
       <SortingProducts />
      
     </div>

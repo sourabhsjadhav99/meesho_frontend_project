@@ -7,25 +7,29 @@ import { FaRupeeSign } from "react-icons/fa";
 import { FaStar } from "react-icons/fa6";
 import Img from "../../components/Img";
 import style from "./singleProduct.module.css";
-import { addToCart } from "../../redux/cartSlice";
+import { addToCart, buyNow } from "../../redux/cartSlice";
 import { useDispatch } from "react-redux";
 function SingleProduct() {
   const { id } = useParams();
   const { data, loading } = useFetch(`/products/${id}`);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [clickedIndex, setClickedIndex] = useState(0);
-  let navigate = useNavigate()
+  let navigate = useNavigate();
   const dispatch = useDispatch();
   const handleAddToCart = () => {
     dispatch(addToCart(data));
-    navigate("/cart")
+    navigate("/cart");
   };
+const handleBuyNow =()=>{
+  dispatch(buyNow(data));
+  navigate("/pay");
+}
 
   return (
     <div className="flex justify-center my-10 ">
       {data ? (
         <div className=" w-[70%] flex   gap-10 ">
-          <div className="flex w-[40%]">
+          <div className="flex w-[45%] gap-2">
             <div className="w-[12%] flex flex-col gap-2">
               {data?.images?.map((image, index) => {
                 return (
@@ -51,7 +55,7 @@ function SingleProduct() {
                   className="w-full h-full"
                 />
               </div>
-              <div className="w-full flex gap-5 border-b-2  pb-5">
+              <div className="w-full flex justify-center gap-5 border-b-2  pb-5">
                 <button
                   className="flex items-center justify-center gap-2 font-semibold text-lg w-[45%] border text-[#9F2089] border-[#9F2089] p-2 rounded"
                   onClick={handleAddToCart}
@@ -59,14 +63,17 @@ function SingleProduct() {
                   <AiOutlineShoppingCart />
                   Add to Cart
                 </button>
-                <button className="flex items-center justify-center gap-2 font-semibold text-lg w-[45%] bg-[#9F2089] p-2 rounded text-white">
+                <button
+                  className="flex items-center justify-center gap-2 font-semibold text-lg w-[45%] bg-[#9F2089] p-2 rounded text-white"
+                  onClick={handleBuyNow}
+                >
                   <RxDoubleArrowRight />
                   Buy Now
                 </button>
               </div>
             </div>
           </div>
-          <div className="w-[60%] flex flex-col gap-5 ">
+          <div className="w-[55%] flex flex-col gap-5 ">
             <div className="border-2 p-3 flex flex-col rounded gap-5">
               <p className="text-[#8B8BA3] text-lg font-semibold">
                 {" "}
@@ -185,19 +192,20 @@ function SingleProduct() {
         </div>
       ) : (
         <div className="w-[70%] h-screen flex gap-10  justify-between ">
-          <div className={` w-[40%] h-[70%] rounded-lg flex gap-10`}>
+          <div className={` w-[45%] h-[70%] rounded-lg flex gap-10`}>
             <div
-              className={` w-[10%] rounded-lg h-[12%] ${style.skeleton}`}
+              className={` w-[12%] rounded-lg h-[12%] ${style.skeleton}`}
             ></div>
             <div
-              className={` w-[70%] rounded-lg h-[90%] ${style.skeleton}`}
+              className={` w-[80%] rounded-lg h-[90%] ${style.skeleton}`}
             ></div>
           </div>
-          <div className={`flex flex-col gap-10 w-[60%] h-full`}>
+          <div className={`flex flex-col gap-10 w-[55%] h-full`}>
             <div className={` w-full rounded-lg h-1/3 ${style.skeleton}`}></div>
             <div className={` w-full rounded-lg h-1/3 ${style.skeleton}`}></div>
             <div className={` w-full rounded-lg h-1/3 ${style.skeleton}`}></div>
           </div>
+          
         </div>
       )}
     </div>
