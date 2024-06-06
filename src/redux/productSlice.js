@@ -3,7 +3,7 @@ import { fetchDataFromApi } from '../utils/api';
 
 export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
-  async ({ categories = [], sort = '' }, { rejectWithValue }) => {
+  async ({ categories = [], sort = '',searchQuery = ''}, { rejectWithValue }) => {
     try {
       let response;
       if (categories.length === 0) {
@@ -16,7 +16,11 @@ export const fetchProducts = createAsyncThunk(
       }
 
       let products = response.products;
-      console.log(sort)
+      if (searchQuery) {
+        products = products.filter(product => product.title.toLowerCase().includes(searchQuery.toLowerCase()));
+        // console.log("searchQuery",searchQuery)
+      }
+      // console.log(sort)
       // Sorting logic
       if (sort === 'New Arrival') {
         products = products.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));

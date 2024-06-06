@@ -1,15 +1,27 @@
 import React, { useState } from "react";
 import { Link,useLocation } from "react-router-dom";
 import { useAuth } from '../signup/AuthContext';
+import { useDispatch } from 'react-redux';
+import { setSearchQuery } from '../../redux/filterSlice';
+import "./Header.css"
 
 const Navbar = () => {
   const [hoveredItem, setHoveredItem] = useState(null);
+  const [search,setsearch]=useState("")
+  const dispatch = useDispatch();
+
   // const [  isuseLoginsucess, setisuseLoginsucess] = useState(false);
   const { isLoggedIn, setIsLoggedIn } = useAuth();
   const {loginnumber} = useAuth(); 
 
 
 
+
+const handelchange=(e)=>{
+setsearch(e.target.value)
+dispatch(setSearchQuery(e.target.value));
+// console.log(search)
+}
 
   const handleMouseEnter = (item) => {
     setHoveredItem(item);
@@ -41,13 +53,16 @@ const Navbar = () => {
                 type="text"
                 placeholder="Try Saree, Kurti or Search by Product Code"
                 className="w-full px-4 py-2 border-neutral-950	 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                onChange={handelchange}
+                value={search}
+
               />
             </div>
           </div>
           <div className="flex items-center space-x-6">
             <a
               href="demo"
-              className="text-gray-500 hover:text-gray-900 border-r-2 border-r-gray-400 pr-3 flex"
+              className="text-gray-500 hover:text-gray-900 border-r-2 border-r-gray-400 pr-3 flex  mobilehidden"
             >
               <svg
                 viewBox="0 0 16 24"
@@ -67,18 +82,18 @@ const Navbar = () => {
             </a>
             <a
               href="demo"
-              className="text-gray-500 hover:text-gray-900 border-r-2 border-r-gray-400 pr-3"
+              className="text-gray-500 hover:text-gray-900 border-r-2 border-r-gray-400 pr-3  mobilehidden"
             >
               Become a Supplier
             </a>
             <a
               href="demo"
-              className="text-gray-500 hover:text-gray-900 border-r-2 border-r-gray-400 pr-3"
+              className="text-gray-500 hover:text-gray-900 border-r-2 border-r-gray-400 pr-3  mobilehidden"
             >
               Newsroom
             </a>
             {location.pathname === "/" && <><div
-              className="text-gray-500 hover:text-gray-900 flex flex-col justify-center items-center"
+              className="text-gray-500 hover:text-gray-900 flex flex-col justify-center items-center  mobilehidden"
             >
               <svg
                 viewBox="0 0 24 24"
@@ -103,7 +118,7 @@ const Navbar = () => {
                   </clipPath>
                 </defs>
               </svg>
-              <div onMouseLeave={handleMouseLeave} className="relative">
+              <div onMouseLeave={handleMouseLeave} className="relative  mobilehidden">
                 <span onMouseEnter={() => handleMouseEnter("Profile")}>
                   {" "}
                   Profile
@@ -176,7 +191,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      {location.pathname === "/" && <div className="border h-[52px] my-auto">
+      {location.pathname === "/" && <div className="border h-[52px] my-auto mobilehidden">
         <div className=" max-w-7xl mx-auto">
           <div className="flex py-2  items-center justify-between">
             <a
