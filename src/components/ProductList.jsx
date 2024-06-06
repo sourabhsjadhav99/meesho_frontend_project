@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import SkeletonLoader from './Skeleton';
@@ -9,10 +8,19 @@ function ProductList() {
   const dispatch = useDispatch();
   const { data, loading } = useSelector((state) => state.products);
   const selectedCategories = useSelector((state) => state.filters.selectedCategories);
+  const sortOption = useSelector((state) => state.filters.sortOption);
+  const searchQuery = useSelector((state) => state.filters.searchQuery);
+  
+
+
 
   useEffect(() => {
-    dispatch(fetchProducts(selectedCategories));
-  }, [dispatch, selectedCategories]);
+    dispatch(fetchProducts({ categories: selectedCategories, sort: sortOption,searchQuery }));
+  }, [dispatch, selectedCategories, sortOption,searchQuery]);
+
+  useEffect(() => {
+    console.log(data);  // Debugging line to check the fetched data
+  }, [data]);
 
   return (
     <div className="w-full">
