@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { useNavigate } from "react-router-dom";
 import { FaRupeeSign } from "react-icons/fa";
-import "../pages/cart//AddressForm.css"; // Import the CSS file
 import { useDispatch, useSelector } from "react-redux";
 import {
   increaseQuantity,
@@ -13,6 +12,8 @@ import {
   increaseBuyQuantity,
 } from "../redux/cartSlice";
 import Img from "./Img";
+import Swal from "sweetalert2";
+
 function EditSideBar({
   isOpenEdit,
   toggleEditSidebar,
@@ -35,13 +36,25 @@ function EditSideBar({
     dispatch(increaseQuantity(id));
   };
 
+
   const handleDecreaseQuantity = (id) => {
     if (item.quantity > 1) {
       dispatch(decreaseQuantity(id));
     } else {
-      if (window.confirm("Do you want to remove this product from the cart?")) {
-        dispatch(removeFromCart(id));
-      }
+      Swal.fire({
+        title: "Do you want to remove this product from the cart?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, remove it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          dispatch(removeFromCart(id));
+          Swal.fire("Removed!", "Product has been removed from the cart.", "success");
+          toggleEditSidebar()
+        }
+      });
     }
   };
 
