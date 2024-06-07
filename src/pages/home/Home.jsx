@@ -7,6 +7,7 @@ import Footer from "../../components/Footer"
 import { useAuth } from "../../components/signup/AuthContext";
 
 
+// import Footer from "../../components/Footer";
 
 function Home() {
   const {focusonsearch} = useAuth(); 
@@ -17,7 +18,7 @@ function Home() {
       <div className={focusonsearch?"hidden":""}><Cover /> <Categories /></div>
       
       <SortingProducts />
-     
+      <Footer />
     </div>
   );
 }

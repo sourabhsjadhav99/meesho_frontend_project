@@ -17,13 +17,25 @@ import playstore from "../../assets/playstore.webp";
 import appstore from "../../assets/apps_store.webp";
 import supplier from "../../assets/supplier.webp";
 import { FaCheckCircle } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { addMultipleCategories } from "../../redux/filterSlice";
+import { useNavigate } from "react-router-dom";
 function Categories() {
+  const dispatch = useDispatch();
+  let navigate = useNavigate();
+
   const handleplayButtonClick = () => {
-    window.open("https://play.google.com/store/apps/details?id=com.meesho.supply&pid=pow_website&c=pow&pow_click_page_type=HP&pow_distinct_id=96148644", "_blank");
+    window.open(
+      "https://play.google.com/store/apps/details?id=com.meesho.supply&pid=pow_website&c=pow&pow_click_page_type=HP&pow_distinct_id=96148644",
+      "_blank"
+    );
   };
-const handleAppButtonClick = () => {
-  window.open("https://apps.apple.com/us/app/meesho-online-shopping/id1457958492", "_blank");
-};
+  const handleAppButtonClick = () => {
+    window.open(
+      "https://apps.apple.com/us/app/meesho-online-shopping/id1457958492",
+      "_blank"
+    );
+  };
   return (
     <div className="w-full flex flex-col items-center gap-14 justify-center my-10">
       <div className="flex">
@@ -34,47 +46,99 @@ const handleAppButtonClick = () => {
         className=" flex items-end gap-4 px-6 p-10 w-[75%] h-[550px] bg-no-repeat bg-cover rounded-md"
         style={{ backgroundImage: `url(${fashion_forward})` }}
       >
-        <div>
+        <button
+          onClick={() => {
+            dispatch(
+              addMultipleCategories([
+                "womens-dresses",
+                "womens-bags",
+                "womens-jewellery",
+                "beauty",
+              ])
+            );
+            navigate("/category");
+          }}
+        >
           <img className="rounded-sm" src={women_store} alt="women_store" />
-        </div>
-        <div>
+        </button>
+        <button
+          onClick={() => {
+            dispatch(addMultipleCategories(["mens-shirts", "mens-watches"]));
+            navigate("/category");
+          }}
+        >
           <img className="rounded-xl" src={mens_store} alt="mens_store" />
-        </div>
-        <div>
+        </button>
+        <button
+          onClick={() => {
+            dispatch(addMultipleCategories(["tops", "womens-shoes"]));
+            navigate("/category");
+          }}
+        >
           <img className="rounded-xl" src={kids_store} alt="kids_store" />
-        </div>
+        </button>
       </div>
 
       <div
         className=" flex items-center justify-around gap-4 w-[75%] h-[550px] bg-no-repeat bg-cover rounded-md"
         style={{ backgroundImage: `url(${essentials})` }}
       >
-        <div className="w-[180px]">
+        <button
+          className="w-[180px]"
+          onClick={() => {
+            dispatch(
+              addMultipleCategories([
+                "home-decoration",
+                "kitchen-accessories",
+                "skin-care",
+              ])
+            );
+            navigate("/category");
+          }}
+        >
           <img src={view} alt="view" />
-        </div>
+        </button>
         <div className="flex gap-4">
-          <div className="flex flex-col justify-between gap-3">
+          <button
+            className="flex flex-col justify-between gap-3"
+            onClick={() => {
+              dispatch(addMultipleCategories(["home-decoration"]));
+              navigate("/category");
+            }}
+          >
             <img className="rounded-xl" src={home_decor} alt="home_decor" />{" "}
-            <p className="text-xl text-center p-2 text-pink-800 font-bold bg-pink-100 rounded-xl">
+            <p className="text-xl w-[100%] text-center p-2 text-pink-800 font-bold bg-pink-100 rounded-xl">
               Home Decor
             </p>
-          </div>
-          <div className="flex flex-col justify-between gap-3">
+          </button>
+          <button
+            className="flex flex-col justify-between gap-3"
+            onClick={() => {
+              dispatch(addMultipleCategories(["kitchen-accessories"]));
+              navigate("/category");
+            }}
+          >
             <img
               className="rounded-xl"
               src={kitchen_appliances}
               alt="kitchen_appliances"
             />{" "}
-            <p className="text-xl text-center p-2 text-pink-800 font-bold bg-pink-100 rounded-xl">
+            <p className="text-xl w-[100%] text-center p-2 text-pink-800 font-bold bg-pink-100 rounded-xl">
               Kitchen Appliances{" "}
             </p>
-          </div>
-          <div className="flex flex-col justify-between gap-3">
+          </button>
+          <button
+            className="flex flex-col justify-between gap-3"
+            onClick={() => {
+              dispatch(addMultipleCategories(["skin-care"]));
+              navigate("/category");
+            }}
+          >
             <img className="rounded-xl" src={health_care} alt="health_care" />
-            <p className="text-xl text-center p-2 text-pink-800 font-bold bg-pink-100 rounded-xl">
+            <p className="text-xl w-[100%] text-center p-2 text-pink-800 font-bold bg-pink-100 rounded-xl">
               Health Care
             </p>
-          </div>
+          </button>
         </div>
       </div>
 
@@ -82,28 +146,68 @@ const handleAppButtonClick = () => {
         className=" flex items-center justify-around gap-4 w-[75%] h-[550px] bg-no-repeat bg-cover rounded-md"
         style={{ backgroundImage: `url(${new_styles})` }}
       >
-        <div className="w-[180px]">
+        <button
+          className="w-[180px]"
+          onClick={() => {
+            dispatch(
+              addMultipleCategories([
+                "sunglasses",
+                "womens-bags",
+                "mens-shoes",
+                "womens-shoes",
+                "mobile-accessories",
+                "smartphones",
+                "tablets",
+              ])
+            );
+            navigate("/category");
+          }}
+        >
           <img src={view} alt="view" />
-        </div>
+        </button>
         <div className="flex gap-4">
-          <div className="flex flex-col justify-between gap-3">
+          <button
+            className="flex flex-col justify-between gap-3"
+            onClick={() => {
+              dispatch(addMultipleCategories(["sunglasses", "womens-bags"]));
+              navigate("/category");
+            }}
+          >
             <img className="rounded-xl" src={accessories} alt="accessories" />{" "}
-            <p className="text-xl text-center p-2 text-pink-800 font-bold bg-pink-100 rounded-xl">
+            <p className="text-xl w-[100%] text-center p-2 text-pink-800 font-bold bg-pink-100 rounded-xl">
               Accessories
             </p>
-          </div>
-          <div className="flex flex-col justify-between gap-3">
+          </button>
+          <button
+            className="flex flex-col justify-between gap-3"
+            onClick={() => {
+              dispatch(addMultipleCategories(["mens-shoes", "womens-shoes"]));
+              navigate("/category");
+            }}
+          >
             <img className="rounded-xl" src={footwares} alt="footwares" />{" "}
-            <p className="text-xl text-center p-2 text-pink-800 font-bold bg-pink-100 rounded-xl">
+            <p className="text-xl w-[100%] text-center p-2 text-pink-800 font-bold bg-pink-100 rounded-xl">
               Footwares
             </p>
-          </div>
-          <div className="flex flex-col justify-between gap-3">
+          </button>
+          <button
+            className="flex flex-col justify-between gap-3"
+            onClick={() => {
+              dispatch(
+                addMultipleCategories([
+                  "mobile-accessories",
+                  "smartphones",
+                  "tablets",
+                ])
+              );
+              navigate("/category");
+            }}
+          >
             <img className="rounded-xl" src={electronics} alt="electronics" />
-            <p className="text-xl text-center p-2 text-pink-800 font-bold bg-pink-100 rounded-xl">
-              Elecronics
+            <p className="text-xl w-[100%] text-center p-2 text-pink-800 font-bold bg-pink-100 rounded-xl">
+              Electronics
             </p>
-          </div>
+          </button>
         </div>
       </div>
 
@@ -119,7 +223,10 @@ const handleAppButtonClick = () => {
           with Zero Investment
         </h1>
         <div className="flex gap-3 mt-10">
-          <button className="w-[180px] h-[48px]" onClick={handleplayButtonClick}>
+          <button
+            className="w-[180px] h-[48px]"
+            onClick={handleplayButtonClick}
+          >
             <img
               src={playstore}
               alt="playstore"
