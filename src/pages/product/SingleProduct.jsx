@@ -7,11 +7,11 @@ import { FaRupeeSign, FaShoppingCart } from "react-icons/fa";
 import { FaStar } from "react-icons/fa6";
 import Img from "../../components/Img";
 import style from "./singleProduct.module.css";
-import { addToCart, buyNow } from "../../redux/cartSlice";
+import { addToCart, buyNow, setIsCart } from "../../redux/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import Footer from "../../components/Footer";
 
 function SingleProduct() {
   const { id } = useParams();
@@ -24,6 +24,7 @@ function SingleProduct() {
 
   const itemExists = cartItems?.find((item) => item.id === data?.id);
   const handleAddToCart = () => {
+    dispatch(setIsCart(true));
     if (itemExists) {
       navigate("/cart");
     } else {
@@ -42,19 +43,15 @@ function SingleProduct() {
   };
   const handleBuyNow = () => {
     dispatch(buyNow(data));
-    navigate("/pay");
+    dispatch(setIsCart(false));
+    navigate("/buynow");
   };
 
-  const showToastMessage = () => {
-    toast.success("Product added to cart", {
-      position: toast.POSITION.BOTTOM_CENTER,
-    });
-  };
   return (
     <>
       <div className="flex justify-center h-[100%] ">
-        {data ? (
-          <div className=" w-[70%] flex   gap-10 ">
+        {!loading ? (
+          <div className=" w-[70%] flex   gap-10 mt-5 mb-12">
             <div className="flex w-[45%] gap-2">
               <div className="w-[12%] flex flex-col gap-2">
                 {data?.images?.map((image, index) => {
@@ -95,8 +92,8 @@ function SingleProduct() {
                       className="flex items-center justify-center gap-2 font-semibold text-lg w-[45%] border text-[#9F2089] border-[#9F2089] p-2 rounded"
                       onClick={handleAddToCart}
                     >
-                  <FaShoppingCart />
-                     Go to Cart
+                      <FaShoppingCart />
+                      Go to Cart
                     </button>
                   )}
                   <button
@@ -251,8 +248,10 @@ function SingleProduct() {
             </div>
           </div>
         )}
+
         <ToastContainer />
       </div>
+      <Footer />
     </>
   );
 }

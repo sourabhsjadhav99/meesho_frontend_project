@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { FaPhoneVolume, FaLocationDot } from "react-icons/fa6";
 import validationSchema from "../validations/addressValidation";
 
-
 function AddressForm({ isOpenAddress, toggleAddressSidebar, onSave }) {
   const navigate = useNavigate();
 
@@ -21,12 +20,11 @@ function AddressForm({ isOpenAddress, toggleAddressSidebar, onSave }) {
     },
     validationSchema,
     onSubmit: (values) => {
-      
-      // Save address information to state or localStorage
-      console.log(values);
       localStorage.setItem("address", JSON.stringify(values));
-      onSave();
+
       toggleAddressSidebar();
+      navigate("/payment");
+      onSave();
     },
   });
 

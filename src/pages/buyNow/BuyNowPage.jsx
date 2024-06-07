@@ -1,58 +1,28 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { FaRupeeSign } from "react-icons/fa";
-import { removeFromCart } from "../../redux/cartSlice";
-import { useNavigate } from "react-router-dom";
-import { RxCross2 } from "react-icons/rx";
 import Img from "../../components/Img";
-import continueShoppingImg from "../../assets/continue_shopping.png";
-import meeshoLogo from "../../assets/meesho.png";
 import safetyImg from "../../assets/safety.png";
 import AddressForm from "../../components/AddressForm";
 import EditSideBar from "../../components/EditSidebar";
-import Swal from "sweetalert2";
-function CartPage() {
-  const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.cart.items);
+import meeshoLogo from "../../assets/meesho.png";
+import { useSelector } from "react-redux";
+
+function BuyNowPage() {
+  const buyNowFirst = useSelector((state) => state.cart.buyNowItem)
+  console.log(buyNowFirst);
   const [editingItemId, setEditingItemId] = useState(null);
-  const navigate = useNavigate();
   const [isOpenAddress, setIsOpenAddress] = useState(false);
   const [isOpenEdit, setIsOpenEdit] = useState(false);
-  const [editCart, setEditCart] = useState(false);
-
-  const handleRemoveFromCart = (id) => {
-    Swal.fire({
-      title: "Do you want to remove this product from the cart?",
-      icon: "question",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, remove it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        dispatch(removeFromCart(id));
-        Swal.fire(
-          "Removed!",
-          "Product has been removed from the cart.",
-          "success"
-        );
-      }
-    });
-  };
 
   const handleEditClick = (id) => {
     setEditingItemId(id);
   };
 
-  const handleStartShopping = () => {
-    navigate("/");
-  };
-
-  const totalCost = cartItems.reduce(
-    (total, item) => total + parseInt(item.price * 50) * item.quantity,
+  const totalCost = buyNowFirst.reduce(
+    (total, item) => total + item.price * item.quantity * 50,
     0
   );
-
+  
   const toggleAddressSidebar = () => {
     setIsOpenAddress(!isOpenAddress);
   };
@@ -60,10 +30,8 @@ function CartPage() {
     setIsOpenEdit(!isOpenEdit);
   };
 
-
-
   return (
-    <div className="flex flex-col gap-5 min-h-screen">
+    <div className="flex flex-col gap-5">
       <header
         className={`w-[100%] p-5 flex justify-center items-center  border-b-2  content-wrapper ${
           isOpenAddress || isOpenEdit ? "blurred" : ""
@@ -73,19 +41,19 @@ function CartPage() {
           <Img src={meeshoLogo} className="w-[156px] h-[36px]" />
         </div>
       </header>
-      <div className="flex justify-center w-[100%]  relative ">
-        {cartItems.length > 0 ? (
+      <div className="flex justify-center w-[100%] relative ">
+        {buyNowFirst.length > 0 && (
           <div className={`w-[60%] `}>
             <div
               className={`flex justify-center w-[100%] gap-8 content-wrapper ${
                 isOpenAddress || isOpenEdit ? "blurred" : ""
-              } `}
+              }`}
             >
-              <div className="w-[60%] md:w-[80%]">
+              <div className="w-[60%]">
                 <div className="flex flex-col gap-3">
                   <h3 className="text-xl font-semibold">Product Details</h3>
-                  {cartItems.map((item) => (
-                    <div key={item.id} className=" border-2 rounded-lg">
+                  {buyNowFirst.map((item) => (
+                    <div key={item.id} className="border-2 rounded-lg">
                       <div className="flex justify-between p-4 ">
                         <div className="w-[60px] h-[60px] border-2 rounded-md">
                           <Img
@@ -126,14 +94,6 @@ function CartPage() {
                               </p>
                             </div>
                           </div>
-                          <div>
-                            <button
-                              className="flex items-center font-bold "
-                              onClick={() => handleRemoveFromCart(item.id)}
-                            >
-                              <RxCross2 /> REMOVE
-                            </button>
-                          </div>
                         </div>
                         <div className="">
                           <button
@@ -141,7 +101,6 @@ function CartPage() {
                             onClick={() => {
                               toggleEditSidebar();
                               handleEditClick(item.id);
-                              setEditCart(true);
                             }}
                           >
                             EDIT
@@ -206,22 +165,7 @@ function CartPage() {
               toggleEditSidebar={toggleEditSidebar}
               editingItemId={editingItemId}
               setEditingItemId={setEditingItemId}
-              editCart={editCart}
             />
-          </div>
-        ) : (
-          <div className="w-[30%] flex flex-col  items-center gap-3">
-            <div className="w-[100%] px-[25%]">
-              <Img src={continueShoppingImg} className="w-[100%]" />
-            </div>
-            <p className="font-semibold">Your cart is empty</p>
-            <p>Just relax, let us help you find some first-class products</p>
-            <button
-              className="flex items-center w-[50%] justify-center font-bold bg-[#9f2089] p-2 text-white rounded-md"
-              onClick={handleStartShopping}
-            >
-              Start Shopping
-            </button>
           </div>
         )}
       </div>
@@ -229,4 +173,4 @@ function CartPage() {
   );
 }
 
-export default CartPage;
+export default BuyNowPage;

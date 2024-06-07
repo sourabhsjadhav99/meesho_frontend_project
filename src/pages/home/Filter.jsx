@@ -13,7 +13,7 @@ import {
   togglePrices,
 } from "../../redux/filterSlice";
 
-function Filter() {
+function Filter({isCategory}) {
   const [isRatingsOpen, setIsRatingsOpen] = useState(false);
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [isPricesOpen, setIsPricesOpen] = useState(false);
@@ -31,6 +31,7 @@ function Filter() {
 
   const selectedPrices =
     useSelector((state) => state.filters.selectedPrices) || [];
+
   const options = [
     "beauty",
     "fragrances",
@@ -109,6 +110,8 @@ function Filter() {
     dispatch(setSortOption(option));
     setIsOpen(false);
   };
+
+
   return (
     <div>
       <div className="flex flex-col items-center w-[300px] rounded text-[#353543] mb-2">
@@ -155,11 +158,11 @@ function Filter() {
             </button>
             <button
               className={`p-3 w-full text-start text-gray-500 ${
-                sortOption === "Price(High to low)"
+                sortOption === "Price (High to low)"
                   ? "bg-pink-100"
                   : "hover:bg-[#F8F8FF]"
               }`}
-              onClick={() => handleSortChange("Price(High to low)")}
+              onClick={() => handleSortChange("Price (High to low)")}
             >
               Price(High to low)
             </button>
@@ -199,7 +202,7 @@ function Filter() {
             <small>1000+ Products</small>
           </div>
           {hasSelectedFilters && (
-            <div>
+            <div className={`${isCategory && "hidden"}`}>
               <button onClick={clearAll} className="font-bold text-[#9F2089]">
                 CLEAR ALL
               </button>
@@ -207,8 +210,8 @@ function Filter() {
           )}
         </div>
 
-        <hr className="m-4 w-[90%] border border-gray-300" />
-        <div className="relative flex flex-col items-start p-1 w-full rounded text-[#353543]">
+        <hr className={`m-4 w-[93%]  border border-gray-300 ${isCategory && "hidden"}`} />
+        <div className={`relative flex flex-col items-start p-1 w-full rounded text-[#353543] ${isCategory && "hidden"}`}>
           <button
             onClick={() => setIsCategoryOpen((prev) => !prev)}
             className="w-full flex justify-between items-center"
@@ -269,7 +272,7 @@ function Filter() {
             </div>
           )}
         </div>
-        <hr className="m-4 w-[90%] border border-gray-300" />
+        <hr className="m-4 w-[93%]  border border-gray-300" />
         <div className="relative flex flex-col items-center w-full rounded text-[#353543]">
           <button
             onClick={() => setIsPricesOpen((prev) => !prev)}
@@ -306,7 +309,7 @@ function Filter() {
           )}
         </div>
 
-        <hr className="m-4 w-[90%] border border-gray-300" />
+        <hr className="m-4 w-[93%]  border border-gray-300" />
         <div className="relative flex flex-col items-center w-full rounded text-[#353543]">
           <button
             onClick={() => setIsRatingsOpen((prev) => !prev)}
