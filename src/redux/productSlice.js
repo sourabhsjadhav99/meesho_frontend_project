@@ -3,7 +3,7 @@ import { fetchDataFromApi } from '../utils/api';
 
 export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
-  async ({ categories = [], sort = '',searchQuery = ''}, { rejectWithValue }) => {
+  async ({ categories = [], sort = '',searchQuery = '', price = [], ratings=[] }, { rejectWithValue }) => {
     try {
       let response;
       if (categories.length === 0) {
@@ -21,13 +21,30 @@ export const fetchProducts = createAsyncThunk(
         // console.log("searchQuery",searchQuery)
       }
       // console.log(sort)
+
+      console.log(ratings,price)
+
+      let getPriceNumber = price?.map((num) => num.split(" ")[1]).map(Number)
+      let maxPrice = Math.max(...getPriceNumber,0)
+      if (maxPrice > 0) {
+        products = products.filter((elm) => parseInt(elm.price * 50) < maxPrice)
+      }
+
+      let getRatingsNumber = ratings?.map((num) => num.split(" ")[0]).map(Number)
+      let minRatings = Math.min(...getRatingsNumber)
+
+      if (minRatings <= 5) {
+        products = products.filter((elm) => elm.rating >= minRatings)
+      }
+
+
       // Sorting logic
-      if (sort === 'New Arrival') {
+      if (sort === "New Arrival") {
         products = products.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-      } else if (sort === 'Price (High to low)') {
-        products = products.sort((a, b) => b.price - a.price);
-      } else if (sort === 'Price (Low to high)') {
-        products = products.sort((a, b) => a.price - b.price);
+      } else if (sort === "Price (High to low)") {
+        products = products.sort((a, b) => parseInt(b.price*50) - parseInt(a.price*50));
+      } else if (sort === "Price (Low to high)") {
+        products = products.sort((a, b) => parseInt(a.price*50) - parseInt(b.price*50));
       } else if (sort === 'Ratings') {
         products = products.sort((a, b) => b.rating - a.rating);
       } else if (sort === 'Discount') {

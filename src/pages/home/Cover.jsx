@@ -7,7 +7,7 @@ function Cover() {
   };
 
   return (
-    <div className="w-full my-8 flex flex-col items-center gap-14 justify-center">
+    <div className="w-full  flex flex-col items-center gap-14 justify-center my-12">
       <div className="flex w-[75%] h-[350px] justify-between rounded-md">
         <div className="w-1/2 flex flex-col justify-between items-start rounded-l-md bg-[#F8F8FF] p-5">
           <div className="text-5xl font-semibold text-[#353543]">
