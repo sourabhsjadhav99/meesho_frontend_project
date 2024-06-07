@@ -19,7 +19,7 @@ import CategoryPage from './pages/category/CategoryPage';
 function App() {
   return (
     <BrowserRouter>
-      {window.location.pathname=="cart"?<Navbar />:""}
+      {window.location.pathname=="cart"?"":<Navbar />}
 
       <Routes>
 
