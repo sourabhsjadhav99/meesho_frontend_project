@@ -11,10 +11,14 @@ import { addToCart, buyNow } from "../../redux/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useAuth } from "../../components/signup/AuthContext";
+
 
 
 function SingleProduct() {
   const { id } = useParams();
+  const { isLoggedIn } = useAuth();
+
   const { data, loading } = useFetch(`/products/${id}`);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [clickedIndex, setClickedIndex] = useState(0);
@@ -85,7 +89,7 @@ function SingleProduct() {
                   {!itemExists ? (
                     <button
                       className="flex items-center justify-center gap-2 font-semibold text-lg w-[45%] border text-[#9F2089] border-[#9F2089] p-2 rounded"
-                      onClick={handleAddToCart}
+                      onClick={isLoggedIn?handleAddToCart:()=>navigate("/signup")}
                     >
                       <AiOutlineShoppingCart />
                       Add to Cart

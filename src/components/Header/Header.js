@@ -1,37 +1,39 @@
 import React, { useState } from "react";
-import { Link,useLocation,useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from '../signup/AuthContext';
 import { useDispatch } from 'react-redux';
 import { setSearchQuery } from '../../redux/filterSlice';
+import { addMultipleCategories } from "../../redux/filterSlice";
+
 import "./Header.css"
 
 const Navbar = () => {
   const [hoveredItem, setHoveredItem] = useState(null);
-  const [search,setsearch]=useState("")
+  const [search, setsearch] = useState("")
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
 
   // const [  isuseLoginsucess, setisuseLoginsucess] = useState(false);
   const { isLoggedIn, setIsLoggedIn } = useAuth();
-  const {setfocusonsearch}=useAuth();
-  const {loginnumber} = useAuth(); 
+  const { setfocusonsearch } = useAuth();
+  const { loginnumber } = useAuth();
 
 
 
 
-const handelchange=(e)=>{
-setsearch(e.target.value)
-if(e.target.value===""){
-  setfocusonsearch(false)
-}
-else{
-  setfocusonsearch(true)
+  const handelchange = (e) => {
+    setsearch(e.target.value)
+    if (e.target.value === "") {
+      setfocusonsearch(false)
+    }
+    else {
+      setfocusonsearch(true)
 
-}
-dispatch(setSearchQuery(e.target.value));
-// console.log(search)
-}
+    }
+    dispatch(setSearchQuery(e.target.value));
+    // console.log(search)
+  }
 
   const handleMouseEnter = (item) => {
     setHoveredItem(item);
@@ -91,13 +93,13 @@ dispatch(setSearchQuery(e.target.value));
               <span> Download App</span>
             </a>
             <a
-              href="demo"
+              href="/"
               className="text-gray-500 hover:text-gray-900 border-r-2 border-r-gray-400 pr-3  mobilehidden"
             >
               Become a Supplier
             </a>
             <a
-              href="demo"
+              href="/"
               className="text-gray-500 hover:text-gray-900 border-r-2 border-r-gray-400 pr-3  mobilehidden"
             >
               Newsroom
@@ -137,21 +139,21 @@ dispatch(setSearchQuery(e.target.value));
                   <div className="absolute  w-[250px] right-[-120px] bg-white shadow-lg rounded-lg py-2">
                     <div className="px-4 py-2 text-gray-800 border-b">
                       <p className=" font-semibold text-xl">Hello User</p>
-                      {isLoggedIn?<p>{loginnumber}</p>:<p className="text-[12px]">
+                      {isLoggedIn ? <p>{loginnumber}</p> : <p className="text-[12px]">
                         To access your Meesho account
                       </p>}
                     </div>
-                   
-                    
-                  { isLoggedIn ?<Link to="/" className="text-lg rounded-md	 block px-4 mx-4 py-2 text-white font-bold bg-purple-700 text-center"  onClick={handleLogout}>Logout</Link>
-                  :<Link to="/signup"
-                      href="demo"
-                      className="text-lg rounded-md	 block px-4 mx-4 py-2 text-white font-bold bg-purple-700 text-center"
-                    >
-                  Sign Up</Link>}    
-                    
+
+
+                    {isLoggedIn ? <Link to="/" className="text-lg rounded-md	 block px-4 mx-4 py-2 text-white font-bold bg-purple-700 text-center" onClick={handleLogout}>Logout</Link>
+                      : <Link to="/signup"
+                        href="/"
+                        className="text-lg rounded-md	 block px-4 mx-4 py-2 text-white font-bold bg-purple-700 text-center"
+                      >
+                        Sign Up</Link>}
+
                     <a
-                      href="demo"
+                      href="/"
                       className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                     >
                       My Orders
@@ -160,59 +162,58 @@ dispatch(setSearchQuery(e.target.value));
                 )}
               </div>
             </div>
-            <div
-            
-              className="text-gray-500 hover:text-gray-900 flex flex-col justify-center items-center cursor-pointer"
-              onClick={()=>{
-                isLoggedIn?navigate("/cart"):navigate("/signup")
+              <div
 
-              }}
-            >
-              <svg
-                viewBox="0 0 20 20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                mr="8"
-                class="sc-pyfCe hSGtBS hover"
-                stroke="greyBase"
-                iconSize="20"
+                className="text-gray-500 hover:text-gray-900 flex flex-col justify-center items-center cursor-pointer"
+                onClick={() => {
+                  isLoggedIn ? navigate("/cart") : navigate("/signup")
+
+                }}
               >
-                <path
-                  d="m4.987 5.469 1.848 7.2a1 1 0 0 0 .968.752h8.675a1 1 0 0 0 .962-.726l1.697-5.952a1 1 0 0 0-.962-1.274H4.987Zm0 0-.943-3.248a1 1 0 0 0-.96-.721H1"
-                  stroke="#666"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                ></path>
-                <ellipse
-                  cx="9.421"
-                  cy="16.744"
-                  rx="1.243"
-                  ry="1.256"
-                  stroke="#666"
-                  stroke-width="1.5"
-                ></ellipse>
-                <ellipse
-                  cx="15.221"
-                  cy="16.744"
-                  rx="1.243"
-                  ry="1.256"
-                  stroke="#666"
-                  stroke-width="1.5"
-                ></ellipse>
-              </svg>
-              <span> Cart</span>
-            </div> </>}
+                <svg
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  mr="8"
+                  class="sc-pyfCe hSGtBS hover"
+                  stroke="greyBase"
+                  iconSize="20"
+                >
+                  <path
+                    d="m4.987 5.469 1.848 7.2a1 1 0 0 0 .968.752h8.675a1 1 0 0 0 .962-.726l1.697-5.952a1 1 0 0 0-.962-1.274H4.987Zm0 0-.943-3.248a1 1 0 0 0-.96-.721H1"
+                    stroke="#666"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                  ></path>
+                  <ellipse
+                    cx="9.421"
+                    cy="16.744"
+                    rx="1.243"
+                    ry="1.256"
+                    stroke="#666"
+                    stroke-width="1.5"
+                  ></ellipse>
+                  <ellipse
+                    cx="15.221"
+                    cy="16.744"
+                    rx="1.243"
+                    ry="1.256"
+                    stroke="#666"
+                    stroke-width="1.5"
+                  ></ellipse>
+                </svg>
+                <span> Cart</span>
+              </div> </>}
           </div>
         </div>
       </div>
       {location.pathname === "/" && <div className="border h-[52px] my-auto mobilehidden">
         <div className=" max-w-7xl mx-auto">
           <div className="flex py-2  items-center justify-between">
-            <a
-              href="demo"
+            <div
               className="text-gray-700 hover:text-gray-900"
 
-              //   onMouseLeave={handleMouseLeave}
+            //   onMouseLeave={handleMouseLeave}
             >
               <span onMouseEnter={() => handleMouseEnter("Women Ethnic")}>
                 {" "}
@@ -231,7 +232,7 @@ dispatch(setSearchQuery(e.target.value));
                       All Women Ethnic
                     </p>
                     <a
-                      href="demo"
+                      href="/"
                       className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                     >
                       View All
@@ -241,49 +242,49 @@ dispatch(setSearchQuery(e.target.value));
                   <div>
                     <p className="text-fuchsia-800 px-3 font-bold">Sarees</p>
                     <a
-                      href="demo"
+                      href="/"
                       className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                     >
                       All Sarees
                     </a>
                     <a
-                      href="demo"
+                      href="/"
                       className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                     >
                       Silk Sarees
                     </a>
                     <a
-                      href="demo"
+                      href="/"
                       className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                     >
                       Cotton Silk Sarees
                     </a>
                     <a
-                      href="demo"
+                      href="/"
                       className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                     >
                       Cotton Sarees
                     </a>
                     <a
-                      href="demo"
+                      href="/"
                       className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                     >
                       Georgette Sarees
                     </a>
                     <a
-                      href="demo"
+                      href="/"
                       className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                     >
                       Chiffon Sarees
                     </a>
                     <a
-                      href="demo"
+                      href="/"
                       className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                     >
                       Satin Sarees
                     </a>
                     <a
-                      href="demo"
+                      href="/"
                       className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                     >
                       Embroidered Sarees
@@ -293,31 +294,31 @@ dispatch(setSearchQuery(e.target.value));
                   <div>
                     <p className="text-fuchsia-800 px-3 font-bold">Kurtis</p>
                     <a
-                      href="demo"
+                      href="/"
                       className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                     >
                       All Kurtis
                     </a>
                     <a
-                      href="demo"
+                      href="/"
                       className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                     >
                       Anarkali Kurtis
                     </a>
                     <a
-                      href="demo"
+                      href="/"
                       className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                     >
                       Rayon Kurtis
                     </a>
                     <a
-                      href="demo"
+                      href="/"
                       className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                     >
                       Cotton Kurtis
                     </a>
                     <a
-                      href="demo"
+                      href="/"
                       className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                     >
                       Embroidered Kurtis
@@ -329,7 +330,7 @@ dispatch(setSearchQuery(e.target.value));
                       Kurta Sets
                     </p>
                     <a
-                      href="demo"
+                      href="/"
                       className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                     >
                       All Kurta Sets
@@ -348,78 +349,92 @@ dispatch(setSearchQuery(e.target.value));
                   {/* Dropdown items for Women Ethnic */}
                   <div>
                     <p className="text-fuchsia-800 px-3 font-bold">Topwear</p>
-                    <a
-                      href="demo"
+                    <button
                       className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                      onClick={() => {
+                        dispatch(addMultipleCategories(["tops"]));
+                        navigate("/category");
+                      }}
                     >
                       Tops
-                    </a>
-                    <a
-                      href="demo"
+                    </button>
+                    <button
+                      onClick={() => {
+                        dispatch(addMultipleCategories(["womens-dresses"]));
+                        navigate("/category");
+                      }}
+
                       className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                     >
                       Dresses
-                    </a>
-                    <a
-                      href="demo"
+                    </button>
+                    <button
+                      onClick={() => {
+                        dispatch(addMultipleCategories(["womens-dresses"]));
+                        navigate("/category");
+                      }}
                       className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                     >
                       Sweaters
-                    </a>
-                    <a
-                      href="demo"
-                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                    </button>
+                    <button
+                      onClick={() => {
+                        dispatch(addMultipleCategories(["womens-dresses"]));
+                        navigate("/category");
+                      }} className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                     >
                       Jumpsuits
-                    </a>
+                    </button>
                   </div>
 
                   <div>
                     <p className="text-fuchsia-800 px-3 font-bold">Sarees</p>
-                    <a
-                      href="demo"
-                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                    <button
+                      onClick={() => {
+                        dispatch(addMultipleCategories(["womens-dresses"]));
+                        navigate("/category");
+                      }} className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                     >
                       All Sarees
-                    </a>
+                    </button>
                     <a
-                      href="demo"
+                      href="/"
                       className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                     >
                       Silk Sarees
                     </a>
                     <a
-                      href="demo"
+                      href="/"
                       className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                     >
                       Cotton Silk Sarees
                     </a>
                     <a
-                      href="demo"
+                      href="/"
                       className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                     >
                       Cotton Sarees
                     </a>
                     <a
-                      href="demo"
+                      href="/"
                       className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                     >
                       Georgette Sarees
                     </a>
                     <a
-                      href="demo"
+                      href="/"
                       className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                     >
                       Chiffon Sarees
                     </a>
                     <a
-                      href="demo"
+                      href="/"
                       className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                     >
                       Satin Sarees
                     </a>
                     <a
-                      href="demo"
+                      href="/"
                       className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                     >
                       Embroidered Sarees
@@ -429,31 +444,31 @@ dispatch(setSearchQuery(e.target.value));
                   <div>
                     <p className="text-fuchsia-800 px-3 font-bold">Kurtis</p>
                     <a
-                      href="demo"
+                      href="/"
                       className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                     >
                       All Kurtis
                     </a>
                     <a
-                      href="demo"
+                      href="/"
                       className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                     >
                       Anarkali Kurtis
                     </a>
                     <a
-                      href="demo"
+                      href="/"
                       className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                     >
                       Rayon Kurtis
                     </a>
                     <a
-                      href="demo"
+                      href="/"
                       className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                     >
                       Cotton Kurtis
                     </a>
                     <a
-                      href="demo"
+                      href="/"
                       className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                     >
                       Embroidered Kurtis
@@ -465,7 +480,136 @@ dispatch(setSearchQuery(e.target.value));
                       Kurta Sets
                     </p>
                     <a
-                      href="demo"
+                      href="/"
+                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                    >
+                      All Kurta Sets
+                    </a>
+                  </div>
+
+                  {/* Add more items as needed */}
+                </div>
+              )}
+            </div>
+            <a href="/" className="text-gray-700 hover:text-gray-900">
+              <span onMouseEnter={() => handleMouseEnter("Women Western")}>
+                {" "}
+                Women Western
+              </span>
+            </a>
+            <a href="/" className="text-gray-700 hover:text-gray-900">
+              <span onMouseEnter={() => handleMouseEnter("Women Ethnic")}>Men</span>
+              {hoveredItem === "Men" && (
+                <div
+                  className="absolute mt-2 w-[83%] bg-white shadow-lg rounded-lg flex"
+                  //      onMouseEnter={() => handleMouseEnter("Women Ethnic")}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  {/* Dropdown items for Women Ethnic */}
+                  <div>
+                    <p className="text-fuchsia-800 px-3 font-bold">
+                    Top Wear
+                 </p>
+                    <a
+                      href="/"
+                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                    >
+All Top Wear
+                    </a>
+                  </div>
+
+                  <div>
+                    <p className="text-fuchsia-800 px-3 font-bold">Sarees</p>
+                    <a
+                      href="/"
+                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                    >
+                      All Sarees
+                    </a>
+                    <a
+                      href="/"
+                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                    >
+                      Silk Sarees
+                    </a>
+                    <a
+                      href="/"
+                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                    >
+                      Cotton Silk Sarees
+                    </a>
+                    <a
+                      href="/"
+                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                    >
+                      Cotton Sarees
+                    </a>
+                    <a
+                      href="/"
+                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                    >
+                      Georgette Sarees
+                    </a>
+                    <a
+                      href="/"
+                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                    >
+                      Chiffon Sarees
+                    </a>
+                    <a
+                      href="/"
+                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                    >
+                      Satin Sarees
+                    </a>
+                    <a
+                      href="/"
+                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                    >
+                      Embroidered Sarees
+                    </a>
+                  </div>
+
+                  <div>
+                    <p className="text-fuchsia-800 px-3 font-bold">Kurtis</p>
+                    <a
+                      href="/"
+                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                    >
+                      All Kurtis
+                    </a>
+                    <a
+                      href="/"
+                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                    >
+                      Anarkali Kurtis
+                    </a>
+                    <a
+                      href="/"
+                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                    >
+                      Rayon Kurtis
+                    </a>
+                    <a
+                      href="/"
+                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                    >
+                      Cotton Kurtis
+                    </a>
+                    <a
+                      href="/"
+                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                    >
+                      Embroidered Kurtis
+                    </a>
+                  </div>
+                  <div>
+                    <p className="text-fuchsia-800 px-3 font-bold	">
+                      {" "}
+                      Kurta Sets
+                    </p>
+                    <a
+                      href="/"
                       className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                     >
                       All Kurta Sets
@@ -476,31 +620,22 @@ dispatch(setSearchQuery(e.target.value));
                 </div>
               )}
             </a>
-            <a href="demo" className="text-gray-700 hover:text-gray-900">
-              <span onMouseEnter={() => handleMouseEnter("Women Western")}>
-                {" "}
-                Women Western
-              </span>
-            </a>
-            <a href="demo" className="text-gray-700 hover:text-gray-900">
-              Men
-            </a>
-            <a href="demo" className="text-gray-700 hover:text-gray-900">
+            <a href="/" className="text-gray-700 hover:text-gray-900">
               Kids
             </a>
-            <a href="demo" className="text-gray-700 hover:text-gray-900">
+            <a href="/" className="text-gray-700 hover:text-gray-900">
               Home & Kitchen
             </a>
-            <a href="demo" className="text-gray-700 hover:text-gray-900">
+            <a href="/" className="text-gray-700 hover:text-gray-900">
               Beauty & Health
             </a>
-            <a href="demo" className="text-gray-700 hover:text-gray-900">
+            <a href="/" className="text-gray-700 hover:text-gray-900">
               Jewellery & Accessories
             </a>
-            <a href="demo" className="text-gray-700 hover:text-gray-900">
+            <a href="/" className="text-gray-700 hover:text-gray-900">
               Bags & Footwear
             </a>
-            <a href="demo" className="text-gray-700 hover:text-gray-900">
+            <a href="/" className="text-gray-700 hover:text-gray-900">
               Electronics
             </a>
           </div>
