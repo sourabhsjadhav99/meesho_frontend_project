@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link,useLocation } from "react-router-dom";
+import { Link,useLocation,useNavigate } from "react-router-dom";
 import { useAuth } from '../signup/AuthContext';
 import { useDispatch } from 'react-redux';
 import { setSearchQuery } from '../../redux/filterSlice';
@@ -9,9 +9,12 @@ const Navbar = () => {
   const [hoveredItem, setHoveredItem] = useState(null);
   const [search,setsearch]=useState("")
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
 
   // const [  isuseLoginsucess, setisuseLoginsucess] = useState(false);
   const { isLoggedIn, setIsLoggedIn } = useAuth();
+  const {setfocusonsearch}=useAuth();
   const {loginnumber} = useAuth(); 
 
 
@@ -19,6 +22,13 @@ const Navbar = () => {
 
 const handelchange=(e)=>{
 setsearch(e.target.value)
+if(e.target.value===""){
+  setfocusonsearch(false)
+}
+else{
+  setfocusonsearch(true)
+
+}
 dispatch(setSearchQuery(e.target.value));
 // console.log(search)
 }
@@ -61,7 +71,7 @@ dispatch(setSearchQuery(e.target.value));
           </div>
           <div className="flex items-center space-x-6">
             <a
-              href="demo"
+              href="https://play.google.com/store/apps/details?id=com.meesho.supply&pid=pow_website&c=pow&pli=1"
               className="text-gray-500 hover:text-gray-900 border-r-2 border-r-gray-400 pr-3 flex  mobilehidden"
             >
               <svg
@@ -150,9 +160,13 @@ dispatch(setSearchQuery(e.target.value));
                 )}
               </div>
             </div>
-            <a
-              href="demo"
-              className="text-gray-500 hover:text-gray-900 flex flex-col justify-center items-center"
+            <div
+            
+              className="text-gray-500 hover:text-gray-900 flex flex-col justify-center items-center cursor-pointer"
+              onClick={()=>{
+                isLoggedIn?navigate("/cart"):navigate("/signup")
+
+              }}
             >
               <svg
                 viewBox="0 0 20 20"
@@ -187,7 +201,7 @@ dispatch(setSearchQuery(e.target.value));
                 ></ellipse>
               </svg>
               <span> Cart</span>
-            </a> </>}
+            </div> </>}
           </div>
         </div>
       </div>
