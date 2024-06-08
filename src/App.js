@@ -4,7 +4,7 @@ import './index.css'; // Ensure this import is present
 import Home from './pages/home/Home';
 import SingleProduct from './pages/product/SingleProduct';
 import { BrowserRouter, Route, Routes,useLocation } from 'react-router-dom';
-import Signup from './components/signup/Signup';
+import Signup from './components/signup/signup';
 import Footer from './components/Footer';
 // import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import CartPage from './pages/cart/CartPage';
