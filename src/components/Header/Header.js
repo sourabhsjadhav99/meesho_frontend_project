@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../signup/AuthContext";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setSearchQuery } from "../../redux/filterSlice";
 import { addMultipleCategories } from "../../redux/filterSlice";
 
@@ -12,6 +12,8 @@ const Navbar = () => {
   const [search, setsearch] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const cartItems = useSelector((state) => state.cart.items);
+  console.log(cartItems.length)
 
   // const [  isuseLoginsucess, setisuseLoginsucess] = useState(false);
   const { isLoggedIn, setIsLoggedIn } = useAuth();
@@ -173,7 +175,7 @@ const Navbar = () => {
                   </div>
                 </div>
                 <div
-                  className="text-gray-500 hover:text-gray-900 flex flex-col justify-center items-center cursor-pointer"
+                  className="text-gray-500 hover:text-gray-900 flex flex-col justify-center items-center cursor-pointer relative"
                   onClick={() => {
                     isLoggedIn ? navigate("/cart") : navigate("/signup");
                   }}
@@ -210,6 +212,7 @@ const Navbar = () => {
                       stroke-width="1.5"
                     ></ellipse>
                   </svg>
+                  <small className="bg-[#ffe7fb] flex items-center justify-center w-[15px] h-[15px] rounded-full text-xs absolute left-[15px] bottom-[35px]">{cartItems.length}</small>
                   <span> Cart</span>
                 </div>{" "}
               </>
