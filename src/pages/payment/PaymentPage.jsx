@@ -85,7 +85,7 @@ function PaymentPage() {
 
       const address = JSON.parse(localStorage.getItem("address"));
       const options = {
-        key: process.env.REACT_APP_RAZORPAY_KEY,
+        key: "rzp_test_0A7hQeX69z0TCU",
         amount: parseInt(totalCost) * 100, // Amount in paise
         currency: "INR",
         name: "Meesho",
