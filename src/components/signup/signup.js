@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 // Signup.js
-=======
->>>>>>> sourabh
 import React, { useState } from "react";
 import { auth } from './firebase';
 import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
@@ -10,22 +7,11 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAuth } from './AuthContext';
 
-<<<<<<< HEAD
 const Signup = () => {
     const navigate = useNavigate();
     const notify = (message) => toast(message);
     const { setIsLoggedIn,  currentroutes } = useAuth();
     const { setloginnumber,loginnumber } = useAuth();
-=======
-
-const Signup = () => {
-    const navigate = useNavigate();
-    const notify = (message) => toast(message);
-    const { setIsLoggedIn } = useAuth();
-    const {setloginnumber} =  useAuth()
-
-
->>>>>>> sourabh
 
     const [hasFilled, setHasFilled] = useState(false);
     const [otp, setOtp] = useState(new Array(6).fill(""));
@@ -43,10 +29,7 @@ const Signup = () => {
 
     const handleSend = (event) => {
         setloginnumber(phone)
-<<<<<<< HEAD
         localStorage.setItem('phonenumber',loginnumber);
-=======
->>>>>>> sourabh
 
         event.preventDefault();
         setHasFilled(true);
@@ -81,15 +64,11 @@ const Signup = () => {
                 let user = result.user;
                 setIsLoggedIn(true);
                 console.log(user);
-<<<<<<< HEAD
                 localStorage.setItem('isLoggedIn', 'true');
                 setTimeout(() => {
                     console.log(currentroutes)
                 }, 1000);
                 navigate(`${currentroutes}`);
-=======
-                navigate("/");
->>>>>>> sourabh
             }).catch((error) => {
                 // User couldn't sign in (bad verification code?)
                 notify('User couldn\'t sign in (bad verification code?)');
@@ -108,11 +87,7 @@ const Signup = () => {
                             <p className="text-[12px] mt-7 text-gray-400">Country</p>
                             <div className="flex gap-5 mt-3">
                                 <p className="text-[17px] border-b-2">IN +91</p>
-<<<<<<< HEAD
                                 <input onChange={(event) => {setPhone(event.target.value)}} className="text-[17px] border-b-2  outline-none" placeholder="Phone Number" />
-=======
-                                <input onChange={(event) => setPhone(event.target.value)} className="text-[17px] border-b-2  outline-none" placeholder="Phone Number" />
->>>>>>> sourabh
                             </div>
                         </>
                     ) : (
