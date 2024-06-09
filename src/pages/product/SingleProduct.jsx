@@ -16,40 +16,68 @@ import { useAuth } from "../../components/signup/AuthContext";
 import Footer from "../../components/Footer";
 
 function SingleProduct() {
-  const { id } = useParams();
-  const { isLoggedIn } = useAuth();
+// Get the product ID from the URL params
+const { id } = useParams();
 
-  const { data, loading } = useFetch(`/products/${id}`);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [clickedIndex, setClickedIndex] = useState(0);
-  let navigate = useNavigate();
-  const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.cart.items);
+// Check if the user is logged in
+const { isLoggedIn } = useAuth();
 
-  const itemExists = cartItems?.find((item) => item.id === data?.id);
-  const handleAddToCart = () => {
-    dispatch(setIsCart(true));
-    if (itemExists) {
-      navigate("/cart");
-    } else {
-      dispatch(addToCart(data));
-      toast.success("Product added to cart", {
-        position: "bottom-center",
-        autoClose: 1500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-    }
-  };
-  const handleBuyNow = () => {
-    dispatch(buyNow(data));
-    dispatch(setIsCart(false));
-    navigate("/buynow");
-  };
+// Fetch product details based on the ID
+const { data, loading } = useFetch(`/products/${id}`);
+
+// State to manage the current index and clicked index (if needed)
+const [currentIndex, setCurrentIndex] = useState(0);
+const [clickedIndex, setClickedIndex] = useState(0);
+
+// Get the navigation function from React Router
+let navigate = useNavigate();
+
+// Get the dispatch function to dispatch Redux actions
+const dispatch = useDispatch();
+
+// Get the cart items from the Redux store
+const cartItems = useSelector((state) => state.cart.items);
+
+// Check if the current product is already in the cart
+const itemExists = cartItems?.find((item) => item.id === data?.id);
+
+// Function to handle adding the product to the cart
+const handleAddToCart = () => {
+  // Set the cart status to true (assuming this updates the cart view)
+  dispatch(setIsCart(true));
+
+  // If the item is already in the cart, navigate to the cart page
+  if (itemExists) {
+    navigate("/cart");
+  } else {
+    // Dispatch the addToCart action with the product data
+    dispatch(addToCart(data));
+
+    // Show a success toast message
+    toast.success("Product added to cart", {
+      position: "bottom-center",
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  }
+};
+
+// Function to handle buying the product now
+const handleBuyNow = () => {
+  // Dispatch the buyNow action with the product data
+  dispatch(buyNow(data));
+
+  // Set the cart status to false (assuming this updates the buy now view)
+  dispatch(setIsCart(false));
+
+  // Navigate to the buy now page
+  navigate("/buynow");
+};
 
   return (
     <>

@@ -1,12 +1,14 @@
 import React from "react";
-import { FaStar } from "react-icons/fa6";
+import { FaStar } from "react-icons/fa";
 import { FaRupeeSign } from "react-icons/fa";
-import Img from "./Img";
-import { useNavigate } from "react-router-dom";
+import Img from "./Img"; // Importing Img component
+import { useNavigate } from "react-router-dom"; // Importing useNavigate from react-router-dom
 
+// ProductCard component definition
 function ProductCard({ data, loading }) {
-  let navigate = useNavigate();
+  let navigate = useNavigate(); // Initializing useNavigate hook
 
+  // JSX content for ProductCard component
   return (
     <>
       {!loading && (
@@ -19,7 +21,6 @@ function ProductCard({ data, loading }) {
               className="w-full h-full rounded-t"
               src={`${data?.images[0]}`}
             />
-
             <small className="bg-[#F8F8FF] p-1 absolute bottom-0 left-[171px] rounded-tl-lg hidden md:block">
               +5 more
             </small>
@@ -79,4 +80,4 @@ function ProductCard({ data, loading }) {
   );
 }
 
-export default ProductCard;
+export default ProductCard; // Exporting ProductCard component

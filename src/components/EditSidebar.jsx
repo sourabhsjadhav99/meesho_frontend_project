@@ -21,54 +21,61 @@ function EditSideBar({
   setEditingItemId,
   editCart,
 }) {
-  const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.cart.items);
-  const editItem = useSelector((state) => state.cart.buyNowItem);
+// Using useDispatch to get the dispatch function
+const dispatch = useDispatch();
 
-  let item = null;
-  if (editCart) {
-    item = cartItems.find((item) => item.id === editingItemId);
+// Using useSelector to get cart items and edit item from the Redux store
+const cartItems = useSelector((state) => state.cart.items);
+const editItem = useSelector((state) => state.cart.buyNowItem);
+
+// Initializing item variable based on editCart state and editingItemId
+let item = null;
+if (editCart) {
+  item = cartItems.find((item) => item.id === editingItemId);
+} else {
+  item = editItem.find((item) => item.id === editingItemId);
+}
+
+// Function to handle increasing quantity of an item in the cart
+const handleIncreaseQuantity = (id) => {
+  dispatch(increaseQuantity(id));
+};
+
+// Function to handle decreasing quantity of an item in the cart
+const handleDecreaseQuantity = (id) => {
+  if (item.quantity > 1) {
+    dispatch(decreaseQuantity(id));
   } else {
-    item = editItem.find((item) => item.id === editingItemId);
+    // Showing a confirmation modal using SweetAlert2 before removing the item
+    Swal.fire({
+      title: "Do you want to remove this product from the cart?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, remove it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(removeFromCart(id));
+        Swal.fire("Removed!", "Product has been removed from the cart.", "success");
+        toggleEditSidebar(); // Assuming toggleEditSidebar is defined elsewhere
+      }
+    });
   }
+};
 
-  const handleIncreaseQuantity = (id) => {
-    dispatch(increaseQuantity(id));
-  };
+// Function to handle increasing quantity of an item in the buy now section
+const handleIncreaseBuyQuantity = (id) => {
+  dispatch(increaseBuyQuantity(id));
+};
 
+// Function to handle decreasing quantity of an item in the buy now section
+const handleDecreaseBuyQuantity = (id) => {
+  if (item.quantity > 1) {
+    dispatch(decreaseBuyQuantity(id));
+  }
+};
 
-  const handleDecreaseQuantity = (id) => {
-    if (item.quantity > 1) {
-      dispatch(decreaseQuantity(id));
-    } else {
-      Swal.fire({
-        title: "Do you want to remove this product from the cart?",
-        icon: "question",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, remove it!",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          dispatch(removeFromCart(id));
-          Swal.fire("Removed!", "Product has been removed from the cart.", "success");
-          toggleEditSidebar()
-        }
-      });
-    }
-  };
-
-  const handleIncreaseBuyQuantity = (id) => {
-    dispatch(increaseBuyQuantity(id));
-  };
-
-  const handleDecreaseBuyQuantity = (id) => {
-    if (item.quantity > 1) {
-      dispatch(decreaseBuyQuantity(id));
-    }
-  };
-
-  console.log(item);
   return (
     <div
       className={`sidebar fixed top-0 right-0 w-[75%] md:w-[35%] h-[100%] bg-white border-l-2 z-100 hidden transition-transform duration-500 ${
