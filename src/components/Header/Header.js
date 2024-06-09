@@ -97,7 +97,7 @@ const Navbar = () => {
             >
               Newsroom
             </a>
-            {location.pathname === "/" && (
+            {(
               <>
                 <div className="text-gray-500 hover:text-gray-900 flex flex-col justify-center items-center  mobilehidden">
                   <svg
@@ -183,7 +183,7 @@ const Navbar = () => {
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                     mr="8"
-                    class="sc-pyfCe hSGtBS hover"
+                    class="sc-pyfCe hSGtBS"
                     stroke="greyBase"
                     iconSize="20"
                   >

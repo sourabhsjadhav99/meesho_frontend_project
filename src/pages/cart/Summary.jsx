@@ -45,10 +45,10 @@ function Summary() {
   return (
     <div>
       <header
-        className={`w-[100%] flex justify-center items-center  border-b-2`}
+        className={`w-[100%] m-0 p-0  flex justify-center items-center  border-b-2 cartheader  content-wrapper`}
       >
-        <div className="w-[75%] flex gap-[150px] items-center m-0 p-0">
-          <Img src={meeshoLogo} className="w-[156px] h-[36px]" />
+        <div className="w-[75%] flex gap-[150px] items-center m-0 p-0 cartheader">
+          <Img src={meeshoLogo} className="w-[156px] h-[36px] mobilelogo" />
           <ProgressBar currentStep={currentStep}/>
         </div>
       </header>
