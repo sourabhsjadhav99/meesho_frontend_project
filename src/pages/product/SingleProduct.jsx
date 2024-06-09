@@ -49,7 +49,10 @@ const handleAddToCart = () => {
   // If the item is already in the cart, navigate to the cart page
   if (itemExists) {
     navigate("/cart");
+    setStep(1)
   } else {
+    setStep(1)
+
     // Dispatch the addToCart action with the product data
     dispatch(addToCart(data));
 

@@ -31,7 +31,7 @@ const ProgressBar = ({ currentStep }) => {
           )}
           {/* Blue line indicating completed steps */}
           {step.number !== steps.length && currentStep >= step.number && (
-            <div className="absolute top-1/2 transform -translate-y-1/2 left-1/2 w-full h-0.5 bg-blue-500 z-10"></div>
+            <div style={{marginTop:"-15px"}} className="absolute top-1/2 transform -translate-y-1/2 left-1/2 w-full h-0.5 bg-blue-500 z-10"></div>
           )}
         </div>
       ))}

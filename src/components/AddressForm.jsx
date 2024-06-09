@@ -33,6 +33,7 @@ const formik = useFormik({
 
     // Navigating to the "/payment" route using useNavigate from React Router
     navigate("/payment");
+    setStep(2)
 
     // Executing the onSave function (assuming this function exists in your component)
     onSave();
