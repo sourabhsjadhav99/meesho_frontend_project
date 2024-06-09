@@ -11,6 +11,7 @@ function AddressForm({ isOpenAddress, toggleAddressSidebar, onSave }) {
   const {setStep} = useAuth(); 
 
 
+<<<<<<< HEAD
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -26,12 +27,36 @@ function AddressForm({ isOpenAddress, toggleAddressSidebar, onSave }) {
       localStorage.setItem("address", JSON.stringify(values));
       setStep(2)
       
+=======
+ 
+// Define formik object with initial values, validation schema, and onSubmit function
+const formik = useFormik({
+  initialValues: {
+    name: "",
+    mobile: "",
+    house: "",
+    road: "",
+    pincode: "",
+    city: "",
+    state: "",
+  },
+  validationSchema, // Assuming validationSchema is defined elsewhere
+  onSubmit: (values) => {
+    // Saving form values to local storage
+    localStorage.setItem("address", JSON.stringify(values));
 
-      toggleAddressSidebar();
-      navigate("/payment");
-      onSave();
-    },
-  });
+    // Toggling the address sidebar (assuming this function exists in your component)
+    toggleAddressSidebar();
+
+    // Navigating to the "/payment" route using useNavigate from React Router
+    navigate("/payment");
+
+    // Executing the onSave function (assuming this function exists in your component)
+    onSave();
+  },
+});
+>>>>>>> sourabh
+
 
   return (
     <div

@@ -12,16 +12,16 @@ import { useAuth } from "../../components/signup/AuthContext";
 import { useSelector } from "react-redux";
 
 function BuyNowPage() {
-  const buyNowFirst = useSelector((state) => state.cart.buyNowItem)
-  console.log(buyNowFirst);
-  const [editingItemId, setEditingItemId] = useState(null);
-  const [isOpenAddress, setIsOpenAddress] = useState(false);
-  const [isOpenEdit, setIsOpenEdit] = useState(false);
+// Fetch the buy now items from the Redux store
+const buyNowFirst = useSelector((state) => state.cart.buyNowItem);
+console.log(buyNowFirst);
 
-  const handleEditClick = (id) => {
-    setEditingItemId(id);
-  };
+// State to manage editing item ID, address form visibility, and edit sidebar visibility
+const [editingItemId, setEditingItemId] = useState(null);
+const [isOpenAddress, setIsOpenAddress] = useState(false);
+const [isOpenEdit, setIsOpenEdit] = useState(false);
 
+<<<<<<< HEAD
   const totalCost = buyNowFirst.reduce(
     (total, item) => total + item.price * item.quantity * 50,
     0
@@ -35,6 +35,28 @@ function BuyNowPage() {
   };
   const {currentStep} = useAuth(); 
 
+=======
+// Function to handle click on edit button
+const handleEditClick = (id) => {
+  setEditingItemId(id);
+};
+
+// Calculate total cost of buy now items
+const totalCost = buyNowFirst.reduce(
+  (total, item) => total + item.price * item.quantity * 50,
+  0
+);
+
+// Function to toggle address sidebar visibility
+const toggleAddressSidebar = () => {
+  setIsOpenAddress(!isOpenAddress);
+};
+
+// Function to toggle edit sidebar visibility
+const toggleEditSidebar = () => {
+  setIsOpenEdit(!isOpenEdit);
+};
+>>>>>>> sourabh
 
   return (
     <div className="flex flex-col gap-5">

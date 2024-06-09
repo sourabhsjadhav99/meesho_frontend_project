@@ -18,7 +18,8 @@ function PaymentPage() {
   const buyNowItems = useSelector((state) => state.cart.buyNowItem);
   const isCart = useSelector((state) => state.cart.isCart);
 
-  let totalCost
+  // Calculate total cost based on cart or buy now items
+  let totalCost;
   if (isCart) {
     totalCost = cartItems.reduce(
       (total, item) => total + parseInt(item.price * 50) * item.quantity,
@@ -31,31 +32,33 @@ function PaymentPage() {
     );
   }
 
-
   const [paymentMethod, setPaymentMethod] = useState("payNow");
 
+  // Function to handle payment method change
   const handlePaymentMethodChange = (event) => {
     setPaymentMethod(event.target.value);
   };
 
-  const handleSubmit = async() => {
+  // Function to handle form submission
+  const handleSubmit = async () => {
     if (paymentMethod === "payNow") {
-      handlePayment();
+      handlePayment(); // Handle immediate payment
     } else {
       setStep(3)
       await Swal.fire({
         position: "center",
         icon: "success",
-        title: "Order Placed Succefully",
+        title: "Order Placed Successfully",
         showConfirmButton: false,
         timer: 1500,
       });
-
-      navigate("/summary");
+      navigate("/summary"); // Redirect to summary page for cash on delivery
     }
   };
 
+  // Function to handle immediate payment using Razorpay
   const handlePayment = async () => {
+    // Dynamically load Razorpay SDK
     const loadScript = (src) => {
       return new Promise((resolve, reject) => {
         const script = document.createElement("script");
@@ -87,9 +90,9 @@ function PaymentPage() {
         currency: "INR",
         name: "Meesho",
         description: "Test Transaction",
-        image: "path/to/meesho_logo.png", // Add your logo here
-        handler:async function (response) {
-          // console.log("Payment Success:", response);
+        image: "path/to/meesho_logo.png", // Your logo path
+        handler: async function (response) {
+          console.log("Payment Success:", response);
           await Swal.fire({
             position: "center",
             icon: "success",
@@ -98,7 +101,7 @@ function PaymentPage() {
             timer: 1500,
           });
 
-          navigate("/summary"); // Redirect to a success page
+          navigate("/summary"); // Redirect to success page
         },
         prefill: {
           name: address.name,
@@ -114,6 +117,8 @@ function PaymentPage() {
 
       const paymentObject = new window.Razorpay(options);
       // console.log(paymentObject);
+
+      // Handle payment failure
       paymentObject.on("payment.failed", function (response) {
         // console.error("Payment Failed:", response.error);
         alert(`Payment failed! Reason: ${response.error.reason}`);
@@ -121,7 +126,7 @@ function PaymentPage() {
         navigate("/cart");
       });
 
-      paymentObject.open();
+      paymentObject.open(); // Open Razorpay payment window
     } catch (error) {
       console.error("Error in handlePayment:", error);
       alert(error.message);

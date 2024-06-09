@@ -14,13 +14,14 @@ import {
 } from "../../redux/filterSlice";
 
 function Filter({ isCategory }) {
-  console.log(isCategory);
+// State variables for managing filter and sorting options
   const [isRatingsOpen, setIsRatingsOpen] = useState(false);
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [isPricesOpen, setIsPricesOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-
   const [isOpen, setIsOpen] = useState(false);
+
+  // Redux setup
   const dispatch = useDispatch();
   const sortOption = useSelector((state) => state.filters.sortOption) || "";
 
@@ -33,6 +34,7 @@ function Filter({ isCategory }) {
   const selectedPrices =
     useSelector((state) => state.filters.selectedPrices) || [];
 
+    // List of available options for categories, ratings, and prices
   const options = [
     "beauty",
     "fragrances",
@@ -60,56 +62,63 @@ function Filter({ isCategory }) {
     "womens-watches",
   ];
 
-  const toggleCheckbox = (option) => {
-    dispatch(toggleCategory(option));
-  };
+// Function to toggle checkboxes for categories
+const toggleCheckbox = (option) => {
+  dispatch(toggleCategory(option));
+};
 
-  const clearAll = () => {
-    dispatch(clearAllCategories());
-  };
+// Function to clear all selected categories
+const clearAll = () => {
+  dispatch(clearAllCategories());
+};
 
-  const filteredOptions = options
-    .filter((option) =>
-      option.toLowerCase().includes(searchQuery.toLowerCase())
-    )
-    .sort((a, b) => {
-      const aSelected = selectedCategories.includes(a);
-      const bSelected = selectedCategories.includes(b);
-      if (aSelected === bSelected) {
-        return a.localeCompare(b);
-      }
-      return aSelected ? -1 : 1;
-    });
-
-  const ratingOptions = ["4 and above", "3.5 and above", "3 and above"].sort(
-    (a, b) => {
-      const aSelected = selectedRatings.includes(a);
-      const bSelected = selectedRatings.includes(b);
-      if (aSelected === bSelected) {
-        return a.localeCompare(b);
-      }
-      return aSelected ? -1 : 1;
-    }
-  );
-
-  const pricesOptions = ["below 150", "below 300", "below 500"].sort((a, b) => {
-    const aSelected = selectedPrices.includes(a);
-    const bSelected = selectedPrices.includes(b);
+// Filter options based on search query and selected categories
+const filteredOptions = options
+  .filter((option) =>
+    option.toLowerCase().includes(searchQuery.toLowerCase())
+  )
+  .sort((a, b) => {
+    const aSelected = selectedCategories.includes(a);
+    const bSelected = selectedCategories.includes(b);
     if (aSelected === bSelected) {
       return a.localeCompare(b);
     }
     return aSelected ? -1 : 1;
   });
 
-  const hasSelectedFilters =
-    selectedCategories.length > 0 ||
-    selectedRatings.length > 0 ||
-    selectedPrices.length > 0;
+// Sort rating options based on selection
+const ratingOptions = ["4 and above", "3.5 and above", "3 and above"].sort(
+  (a, b) => {
+    const aSelected = selectedRatings.includes(a);
+    const bSelected = selectedRatings.includes(b);
+    if (aSelected === bSelected) {
+      return a.localeCompare(b);
+    }
+    return aSelected ? -1 : 1;
+  }
+);
 
-  const handleSortChange = (option) => {
-    dispatch(setSortOption(option));
-    setIsOpen(false);
-  };
+// Sort price options based on selection
+const pricesOptions = ["below 150", "below 300", "below 500"].sort((a, b) => {
+  const aSelected = selectedPrices.includes(a);
+  const bSelected = selectedPrices.includes(b);
+  if (aSelected === bSelected) {
+    return a.localeCompare(b);
+  }
+  return aSelected ? -1 : 1;
+});
+
+// Check if any filters are selected
+const hasSelectedFilters =
+  selectedCategories.length > 0 ||
+  selectedRatings.length > 0 ||
+  selectedPrices.length > 0;
+
+// Function to handle sort change
+const handleSortChange = (option) => {
+  dispatch(setSortOption(option));
+  setIsOpen(false);
+};
 
   return (
     <div>

@@ -15,6 +15,7 @@ import ProgressBar from "./Progress";
 import { useAuth } from "../../components/signup/AuthContext";
 
 function CartPage() {
+<<<<<<< HEAD
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
   const [editingItemId, setEditingItemId] = useState(null);
@@ -64,6 +65,67 @@ function CartPage() {
   };
   const {isLoggedIn,currentStep} = useAuth(); 
 
+=======
+    // Initialize necessary hooks and states
+    const dispatch = useDispatch(); // Redux dispatch function
+    const cartItems = useSelector((state) => state.cart.items); // Select cart items from Redux store
+    const [editingItemId, setEditingItemId] = useState(null); // State to track editing item ID
+    const navigate = useNavigate(); // Navigation hook for routing
+    const [isOpenAddress, setIsOpenAddress] = useState(false); // State for toggling address sidebar
+    const [isOpenEdit, setIsOpenEdit] = useState(false); // State for toggling edit sidebar
+    const [editCart, setEditCart] = useState(false); // State to track cart editing mode
+  
+    // Function to handle remove item from cart action
+    const handleRemoveFromCart = (id) => {
+      // Show confirmation dialog using SweetAlert
+      Swal.fire({
+        title: "Do you want to remove this product from the cart?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, remove it!",
+      }).then((result) => {
+        // If user confirms removal
+        if (result.isConfirmed) {
+          // Dispatch action to remove item from cart
+          dispatch(removeFromCart(id));
+          // Show success message using SweetAlert
+          Swal.fire(
+            "Removed!",
+            "Product has been removed from the cart.",
+            "success"
+          );
+        }
+      });
+    };
+  
+    // Function to handle edit click action
+    const handleEditClick = (id) => {
+      setEditingItemId(id); // Set the editing item ID state
+    };
+  
+    // Function to handle start shopping action
+    const handleStartShopping = () => {
+      navigate("/"); // Navigate to the home page
+    };
+  
+    // Calculate total cost of items in the cart
+    const totalCost = cartItems.reduce(
+      (total, item) => total + parseInt(item.price * 50) * item.quantity,
+      0
+    );
+  
+    // Toggle address sidebar state
+    const toggleAddressSidebar = () => {
+      setIsOpenAddress(!isOpenAddress);
+    };
+  
+    // Toggle edit sidebar state
+    const toggleEditSidebar = () => {
+      setIsOpenEdit(!isOpenEdit);
+    };
+>>>>>>> sourabh
 
   if (!isLoggedIn) {
     return <Navigate to="/signup" replace />;

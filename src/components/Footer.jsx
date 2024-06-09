@@ -1,12 +1,15 @@
 import React from "react";
 
 const Footer = () => {
+  // Function to handle click on Play Store button
   const handleplayButtonClick = () => {
     window.open(
       "https://play.google.com/store/apps/details?id=com.meesho.supply&pid=pow_website&c=pow&pow_click_page_type=HP&pow_distinct_id=96148644",
       "_blank"
     );
   };
+
+  // Function to handle click on App Store button
   const handleAppButtonClick = () => {
     window.open(
       "https://apps.apple.com/us/app/meesho-online-shopping/id1457958492",

@@ -1,8 +1,16 @@
+<<<<<<< HEAD
 import React, { useEffect,useRef } from 'react';
 import './index.css'; // Ensure this import is present
+=======
+import React, { useEffect } from 'react';
+
+// Importing CSS for styling
+import './index.css';
+
+// Importing components and pages
+>>>>>>> sourabh
 import Home from './pages/home/Home';
 import SingleProduct from './pages/product/SingleProduct';
-import { BrowserRouter, Route, Routes,useLocation } from 'react-router-dom';
 import Signup from './components/signup/signup';
 import Footer from './components/Footer';
 import CartPage from './pages/cart/CartPage';
@@ -14,6 +22,10 @@ import CategoryPage from './pages/category/CategoryPage';
 import { useAuth } from './components/signup/AuthContext';
 
 
+// Importing necessary modules from react-router-dom
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
+
+// ScrollToTop component to scroll to the top of the page on route change
 const ScrollToTop = () => {
   const { pathname } = useLocation();
 
@@ -27,6 +39,7 @@ const usePreviousLocations = () => {
   const location = useLocation();
   const previousLocations = useRef([]);
 
+<<<<<<< HEAD
 
 
   useEffect(() => {
@@ -57,7 +70,19 @@ const AppContent = () => {
   return (
     <>
       {(!isCartPage && !ispayment && !issummary && !isbuynow ) && <Navbar />}
+=======
+function App() {
+  return (
+    // Using BrowserRouter to enable routing
+    <BrowserRouter>
+      {/* Conditional rendering of Navbar based on route */}
+      {window.location.pathname === "cart" ? "" : <Navbar />}
+
+      {/* ScrollToTop component */}
+>>>>>>> sourabh
       <ScrollToTop />
+
+      {/* Routes for different pages */}
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/:id' element={<SingleProduct />} />
@@ -67,7 +92,6 @@ const AppContent = () => {
         <Route path="/buynow" element={<BuyNowPage />} />
         <Route path="/payment" element={<PaymentPage />} />
         <Route path="/summary" element={<Summary />} />
-        <Route path="/signup" element={<Signup />} />
       </Routes>
       {!isCartPage && <Footer />}
     </>

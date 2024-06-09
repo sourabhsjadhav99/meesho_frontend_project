@@ -1,4 +1,4 @@
-// SkeletonLoader.js
+// Loader skeleton for productList
 import React from "react";
 
 function SkeletonLoader() {
