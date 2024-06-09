@@ -212,8 +212,8 @@ const Navbar = () => {
                       stroke-width="1.5"
                     ></ellipse>
                   </svg>
-                  <small className="bg-[#ffe7fb] flex items-center justify-center w-[15px] h-[15px] rounded-full text-xs absolute left-[15px] bottom-[35px]">{cartItems.length}</small>
-                  <span> Cart</span>
+                  { isLoggedIn && cartItems.length>0 && <small className="bg-[#ffe7fb] flex items-center justify-center w-[15px] h-[15px] rounded-full text-xs absolute left-[15px] bottom-[35px]">{cartItems.length}</small>
+                  }<span> Cart</span>
                 </div>{" "}
               </>
             )}
