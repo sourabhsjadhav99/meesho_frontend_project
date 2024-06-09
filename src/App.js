@@ -2,13 +2,8 @@ import React, { useEffect,useRef } from 'react';
 import './index.css'; // Ensure this import is present
 import Home from './pages/home/Home';
 import SingleProduct from './pages/product/SingleProduct';
-<<<<<<< HEAD
-import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
-import Signup from './components/signup/Signup';
-=======
 import { BrowserRouter, Route, Routes,useLocation } from 'react-router-dom';
 import Signup from './components/signup/signup';
->>>>>>> a447c2568696bdc4e9d819452c495a6af0e477cb
 import Footer from './components/Footer';
 import CartPage from './pages/cart/CartPage';
 import PaymentPage from './pages/payment/PaymentPage';
