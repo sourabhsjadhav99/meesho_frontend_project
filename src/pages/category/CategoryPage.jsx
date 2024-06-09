@@ -5,8 +5,7 @@ import Footer from "../../components/Footer";
 
 function CategoryPage() {
   return (
-    <div>
-
+    <div className="">
       <SortingProducts isCategory={true}/>
       <Footer />
     </div>

@@ -1,11 +1,9 @@
-
-
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchDataFromApi } from '../utils/api';
 
 export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
-  async ({ categories = [], sort = '', price = [], ratings=[] }, { rejectWithValue }) => {
+  async ({ categories = [], sort = '',searchQuery = '', price = [], ratings=[] }, { rejectWithValue }) => {
     try {
       let response;
       if (categories.length === 0) {
@@ -18,6 +16,11 @@ export const fetchProducts = createAsyncThunk(
       }
 
       let products = response.products;
+      if (searchQuery) {
+        products = products.filter(product => product.title.toLowerCase().includes(searchQuery.toLowerCase()));
+        // console.log("searchQuery",searchQuery)
+      }
+      // console.log(sort)
 
       console.log(ratings,price)
 

@@ -37,19 +37,24 @@ const filterSlice = createSlice({
     },
     togglePrices: (state, action) => {
       const prices = action.payload;
+      console.log(prices)
       if (state.selectedPrices.includes(prices)) {
         state.selectedPrices = state.selectedPrices.filter(g => g !== prices);
       } else {
         state.selectedPrices.push(prices);
       }
     },
+    setSearchQuery: (state, action) => {  // Add this reducer
+      state.searchQuery = action.payload;
+    },
     addMultipleCategories: (state, action) => {
       state.selectedCategories = action.payload;
     }
   },
 });
+// console.log(filterSlice.setSortOption)
 
-export const { toggleCategory, clearAllCategories, setSortOption, toggleRatings, togglePrices, addMultipleCategories } = filterSlice.actions;
+export const { toggleCategory, clearAllCategories, setSortOption,  toggleRatings, togglePrices,setSearchQuery,addMultipleCategories } = filterSlice.actions;
 
 export default filterSlice.reducer;
 

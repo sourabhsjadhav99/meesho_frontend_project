@@ -30,7 +30,7 @@ function AddressForm({ isOpenAddress, toggleAddressSidebar, onSave }) {
 
   return (
     <div
-      className={`sidebar fixed top-0 right-0 w-[35%] h-[100%] bg-white border-l-2 z-100 hidden transition-transform duration-500 ${
+      className={`sidebar fixed top-0 right-0 w-[75%] md:w-[35%] h-[100%] bg-white border-l-2 z-100 hidden transition-transform duration-500 ${
         isOpenAddress ? "open" : ""
       }`}
     >
@@ -61,7 +61,7 @@ function AddressForm({ isOpenAddress, toggleAddressSidebar, onSave }) {
                 className={`w-[100%] border-b p-3  outline-0 ${
                   formik.touched.name && formik.errors.name
                     ? " border-[#9f2089]"
-                    : "border-0"
+                    : ""
                 }`}
                 placeholder="Name"
               />
@@ -81,7 +81,7 @@ function AddressForm({ isOpenAddress, toggleAddressSidebar, onSave }) {
                 className={`w-[100%] border-b p-3  outline-0 ${
                   formik.touched.mobile && formik.errors.mobile
                     ? " border-[#9f2089]"
-                    : "border-0"
+                    : ""
                 }`}
                 placeholder="Contact Number"
               />
@@ -105,7 +105,7 @@ function AddressForm({ isOpenAddress, toggleAddressSidebar, onSave }) {
                 className={`w-[100%] border-b p-3  outline-0 ${
                   formik.touched.house && formik.errors.house
                     ? " border-[#9f2089]"
-                    : "border-0"
+                    : ""
                 }`}
                 placeholder="House No. / Building name"
               />
@@ -125,7 +125,7 @@ function AddressForm({ isOpenAddress, toggleAddressSidebar, onSave }) {
                 className={`w-[100%] border-b p-3  outline-0 ${
                   formik.touched.road && formik.errors.road
                     ? " border-[#9f2089]"
-                    : "border-0"
+                    : ""
                 }`}
                 placeholder="Road Name / Area / Colony"
               />
@@ -145,7 +145,7 @@ function AddressForm({ isOpenAddress, toggleAddressSidebar, onSave }) {
                 className={`w-[100%] border-b p-3  outline-0 ${
                   formik.touched.pincode && formik.errors.pincode
                     ? " border-[#9f2089]"
-                    : "border-0"
+                    : ""
                 }`}
                 placeholder="Pincode"
               />
@@ -165,7 +165,7 @@ function AddressForm({ isOpenAddress, toggleAddressSidebar, onSave }) {
                 className={`w-[100%] border-b p-3  outline-0 ${
                   formik.touched.city && formik.errors.city
                     ? " border-[#9f2089]"
-                    : "border-0"
+                    : ""
                 }`}
                 placeholder="City"
               />
@@ -185,7 +185,7 @@ function AddressForm({ isOpenAddress, toggleAddressSidebar, onSave }) {
                 className={`w-[100%] border-b p-3  outline-0 ${
                   formik.touched.state && formik.errors.state
                     ? " border-[#9f2089]"
-                    : "border-0"
+                    : ""
                 }`}
                 placeholder="State"
               />

@@ -11,10 +11,14 @@ import { addToCart, buyNow, setIsCart } from "../../redux/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useAuth } from "../../components/signup/AuthContext";
+
 import Footer from "../../components/Footer";
 
 function SingleProduct() {
   const { id } = useParams();
+  const { isLoggedIn } = useAuth();
+
   const { data, loading } = useFetch(`/products/${id}`);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [clickedIndex, setClickedIndex] = useState(0);
@@ -51,16 +55,16 @@ function SingleProduct() {
     <>
       <div className="flex justify-center h-[100%] ">
         {!loading ? (
-          <div className=" w-[70%] flex   gap-10 mt-5 mb-12">
-            <div className="flex w-[45%] gap-2">
-              <div className="w-[12%] flex flex-col gap-2">
+          <div className="w-[100%] md:w-[70%] flex flex-col md:flex-row  gap-10 mt-5 mb-12 p-5">
+            <div className="flex flex-col md:flex-row  w-[100%] md:w-[45%] gap-2">
+              <div className="order-2 md:w-[12%] flex md:flex-col gap-2">
                 {data?.images?.map((image, index) => {
                   return (
                     <Img
                       src={image}
                       key={index}
                       alt=""
-                      className={`w-[90%] h-[60px] p-1 border rounded ${
+                      className={`w-[60px] h-[60px] p-1 border rounded ${
                         clickedIndex === index ? "border-[#9F2089]" : ""
                       }`}
                       onClick={() => {
@@ -71,7 +75,7 @@ function SingleProduct() {
                   );
                 })}
               </div>
-              <div className="w-[88%]  flex flex-col  gap-10">
+              <div className="md:order-2 order-1 w-full md:w-[88%]  flex flex-col  gap-10">
                 <div className="border flex justify-center p-1 rounded w-full h-[450px] ">
                   <Img
                     src={`${data?.images[currentIndex]}`}
@@ -82,7 +86,9 @@ function SingleProduct() {
                   {!itemExists ? (
                     <button
                       className="flex items-center justify-center gap-2 font-semibold text-lg w-[45%] border text-[#9F2089] border-[#9F2089] p-2 rounded"
-                      onClick={handleAddToCart}
+                      onClick={
+                        isLoggedIn ? handleAddToCart : () => navigate("/signup")
+                      }
                     >
                       <AiOutlineShoppingCart />
                       Add to Cart
@@ -106,7 +112,7 @@ function SingleProduct() {
                 </div>
               </div>
             </div>
-            <div className="w-[55%] flex flex-col gap-5 ">
+            <div className="w-[100%] md:w-[55%] flex flex-col gap-5 ">
               <div className="border-2 p-3 flex flex-col rounded gap-5">
                 <p className="text-[#8B8BA3] text-lg font-semibold">
                   {" "}
@@ -226,16 +232,24 @@ function SingleProduct() {
             </div>
           </div>
         ) : (
-          <div className="w-[70%] h-screen flex gap-10  justify-between ">
-            <div className={` w-[45%] h-[70%] rounded-lg flex gap-10`}>
+          <div className="w-[100%] md:w-[70%] p-5 h-screen flex flex-col md:flex-row border border-red-600 gap-10  justify-between  ">
+            <div
+              className={`w-full md:w-[45%] h-[70%] rounded-lg flex flex-col-reverse md:flex-row gap-10`}
+            >
+              <div className="md:w-[12%] flex md:flex-col  gap-2">
+                <div
+                  className={` w-[60px] rounded-lg h-[60px] ${style.skeleton}`}
+                ></div>
+                <div
+                  className={` w-[60px] rounded-lg h-[60px] ${style.skeleton}`}
+                ></div>
+              </div>
+
               <div
-                className={` w-[12%] rounded-lg h-[12%] ${style.skeleton}`}
-              ></div>
-              <div
-                className={` w-[80%] rounded-lg h-[90%] ${style.skeleton}`}
+                className={` w-full md:w-[80%] rounded-lg h-[90%] ${style.skeleton}`}
               ></div>
             </div>
-            <div className={`flex flex-col gap-10 w-[55%] h-full`}>
+            <div className={`flex flex-col gap-10 w-[100%] md:w-[55%] h-full`}>
               <div
                 className={` w-full rounded-lg h-1/3 ${style.skeleton}`}
               ></div>
