@@ -7,20 +7,11 @@ const Img = ({ src, className, ...rest }) => {
     return (
         // Using LazyLoadImage component to lazily load images with a blur effect
         <LazyLoadImage
-<<<<<<< HEAD
-            className={className || ""}
-            alt="no image"
-            effect="blur"
-            src={src}
-            {...rest}
-            style={{zIndex:"-1"}}
-=======
             className={className || ""} // Setting optional class name
             alt="no image" // Alt text for accessibility
             effect="blur" // Applying blur effect while loading
             src={src} // Image source
             {...rest} // Additional props passed to LazyLoadImage component
->>>>>>> sourabh
         />
     );
 };

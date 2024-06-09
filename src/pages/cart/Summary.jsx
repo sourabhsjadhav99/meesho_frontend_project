@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -16,25 +15,6 @@ function Summary() {
 // console.log(buyNowItems)
 // console.log(isCart)
   let summaryItem;
-=======
-import React from "react"; // Importing React library for creating components
-import { useSelector } from "react-redux"; // Importing useSelector hook from React Redux for accessing state
-import { useNavigate } from "react-router-dom"; // Importing useNavigate hook from React Router for navigation
-import Img from "../../components/Img"; // Importing Img component for displaying images
-import meeshoLogo from "../../assets/meesho.png"; // Importing Meesho logo image
-
-function Summary() {
-  // Using useSelector to extract data from Redux store
-  const cartItems = useSelector((state) => state.cart.items); // Getting cart items from Redux state
-  const buyNowItems = useSelector((state) => state.cart.buyNowItem); // Getting buy now items from Redux state
-  const isCart = useSelector((state) => state.cart.isCart); // Checking if it's a cart or buy now page
-
-  console.log(cartItems); // Logging cart items to console for debugging
-  console.log(buyNowItems); // Logging buy now items to console for debugging
-  console.log(isCart); // Logging isCart status to console for debugging
-
-  let summaryItem; // Declaring a variable to hold the summary items
->>>>>>> sourabh
   if (isCart) {
     summaryItem = cartItems; // Setting summary items to cart items if it's a cart page
   } else {
@@ -64,19 +44,12 @@ function Summary() {
   // JSX content for rendering the summary component
   return (
     <div>
-<<<<<<< HEAD
       <header
         className={`w-[100%] flex justify-center items-center  border-b-2`}
       >
         <div className="w-[75%] flex gap-[150px] items-center m-0 p-0">
           <Img src={meeshoLogo} className="w-[156px] h-[36px]" />
           <ProgressBar currentStep={currentStep}/>
-=======
-      {/* Header section with Meesho logo */}
-      <header className={`w-[100%] p-5 flex justify-center items-center  border-b-2`}>
-        <div className="w-[95%] md:w-[75%] ">
-          <Img src={meeshoLogo} className="w-[100px] h-[20px] md:w-[156px] md:h-[36px]" />
->>>>>>> sourabh
         </div>
       </header>
 

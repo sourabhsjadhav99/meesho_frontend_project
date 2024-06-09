@@ -20,8 +20,9 @@ console.log(buyNowFirst);
 const [editingItemId, setEditingItemId] = useState(null);
 const [isOpenAddress, setIsOpenAddress] = useState(false);
 const [isOpenEdit, setIsOpenEdit] = useState(false);
-
-<<<<<<< HEAD
+const handleEditClick = (id) => {
+  setEditingItemId(id);
+};
   const totalCost = buyNowFirst.reduce(
     (total, item) => total + item.price * item.quantity * 50,
     0
@@ -35,28 +36,6 @@ const [isOpenEdit, setIsOpenEdit] = useState(false);
   };
   const {currentStep} = useAuth(); 
 
-=======
-// Function to handle click on edit button
-const handleEditClick = (id) => {
-  setEditingItemId(id);
-};
-
-// Calculate total cost of buy now items
-const totalCost = buyNowFirst.reduce(
-  (total, item) => total + item.price * item.quantity * 50,
-  0
-);
-
-// Function to toggle address sidebar visibility
-const toggleAddressSidebar = () => {
-  setIsOpenAddress(!isOpenAddress);
-};
-
-// Function to toggle edit sidebar visibility
-const toggleEditSidebar = () => {
-  setIsOpenEdit(!isOpenEdit);
-};
->>>>>>> sourabh
 
   return (
     <div className="flex flex-col gap-5">

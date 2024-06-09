@@ -15,12 +15,7 @@ const ProgressBar = ({ currentStep }) => {
     <div className="flex justify-between items-center my-6 gap-4">
       {/* Map through steps array to render each step */}
       {steps.map((step) => (
-<<<<<<< HEAD
         <div key={step.number} className="flex-1 relative text-center w-[150px] progressmonile">
-=======
-        <div key={step.number} className="flex-1 relative text-center w-[150px]">
-          {/* Step number circle with dynamic styling based on current step */}
->>>>>>> sourabh
           <div
             className={`w-5 h-5 text-[14px] rounded-full mx-auto ${
               currentStep >= step.number ? 'bg-blue-500 text-white' : 'bg-white text-gray-700 border-2'

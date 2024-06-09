@@ -1,14 +1,5 @@
-<<<<<<< HEAD
 import React, { useEffect,useRef } from 'react';
 import './index.css'; // Ensure this import is present
-=======
-import React, { useEffect } from 'react';
-
-// Importing CSS for styling
-import './index.css';
-
-// Importing components and pages
->>>>>>> sourabh
 import Home from './pages/home/Home';
 import SingleProduct from './pages/product/SingleProduct';
 import Signup from './components/signup/signup';
@@ -39,7 +30,6 @@ const usePreviousLocations = () => {
   const location = useLocation();
   const previousLocations = useRef([]);
 
-<<<<<<< HEAD
 
 
   useEffect(() => {
@@ -70,16 +60,6 @@ const AppContent = () => {
   return (
     <>
       {(!isCartPage && !ispayment && !issummary && !isbuynow ) && <Navbar />}
-=======
-function App() {
-  return (
-    // Using BrowserRouter to enable routing
-    <BrowserRouter>
-      {/* Conditional rendering of Navbar based on route */}
-      {window.location.pathname === "cart" ? "" : <Navbar />}
-
-      {/* ScrollToTop component */}
->>>>>>> sourabh
       <ScrollToTop />
 
       {/* Routes for different pages */}

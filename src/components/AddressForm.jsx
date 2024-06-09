@@ -11,23 +11,6 @@ function AddressForm({ isOpenAddress, toggleAddressSidebar, onSave }) {
   const {setStep} = useAuth(); 
 
 
-<<<<<<< HEAD
-  const formik = useFormik({
-    initialValues: {
-      name: "",
-      mobile: "",
-      house: "",
-      road: "",
-      pincode: "",
-      city: "",
-      state: "",
-    },
-    validationSchema,
-    onSubmit: (values) => {
-      localStorage.setItem("address", JSON.stringify(values));
-      setStep(2)
-      
-=======
  
 // Define formik object with initial values, validation schema, and onSubmit function
 const formik = useFormik({
@@ -55,7 +38,6 @@ const formik = useFormik({
     onSave();
   },
 });
->>>>>>> sourabh
 
 
   return (

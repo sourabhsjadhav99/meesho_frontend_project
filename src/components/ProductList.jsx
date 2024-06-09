@@ -17,25 +17,16 @@ function ProductList() {
 
   // Fetching products based on selected filters when component mounts or filters change
   useEffect(() => {
-<<<<<<< HEAD
     dispatch(fetchProducts({ categories: selectedCategories, sort: sortOption,searchQuery ,price:selectedPrices, ratings:selectedRatings }));
   }, [dispatch, selectedCategories, sortOption,searchQuery,selectedPrices, selectedRatings]);
 
   // useEffect(() => {
   //   console.log(data);  // Debugging line to check the fetched data
   // }, [data]);
-=======
-    dispatch(fetchProducts({ categories: selectedCategories, sort: sortOption, searchQuery, price: selectedPrices, ratings: selectedRatings }));
-  }, [dispatch, selectedCategories, sortOption, searchQuery, selectedPrices, selectedRatings]);
->>>>>>> sourabh
 
   // Logging fetched data for debugging purposes
   useEffect(() => {
-<<<<<<< HEAD
     // console.log(data); // Debugging line to check the fetched data
-=======
-    console.log(data);
->>>>>>> sourabh
   }, [data]);
   return (
     <div className="flex justify-center w-full items-center flex-wrap ">

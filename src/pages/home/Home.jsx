@@ -9,12 +9,11 @@ import Footer from "../../components/Footer"; // Importing the Footer component
 
 function Home() {
   // Using the useAuth hook from AuthContext
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn,focusonsearch } = useAuth();
 
   // JSX content for rendering the Home page
   return (
     <div>
-<<<<<<< HEAD
     
       <div style={{zIndex:"-200"}} className={focusonsearch?"hidden":""}><Cover /> <Categories /></div>
       
@@ -25,23 +24,6 @@ function Home() {
       <SortingProducts />
       {/* <Footer /> */}
     </div>
-=======
-      {/* Main content wrapper */}
-      <div className="flex flex-col gap-5">
-        {/* Cover component for displaying a cover image or banner */}
-        <Cover />
-
-        {/* Categories component for displaying product categories */}
-        <Categories />
-
-        {/* SortingProducts component for sorting and displaying products */}
-        {/* Pass isCategory prop as false to indicate it's not a category page */}
-        <SortingProducts isCategory={false} />
-
-        {/* Footer component for displaying footer information */}
-        <Footer />
-      </div>
->>>>>>> sourabh
     </div>
   );
 }

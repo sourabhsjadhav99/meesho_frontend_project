@@ -76,10 +76,7 @@ const handleDecreaseBuyQuantity = (id) => {
   }
 };
 
-<<<<<<< HEAD
   // console.log(item);
-=======
->>>>>>> sourabh
   return (
     <div
       className={`sidebar fixed top-0 right-0 w-[75%] md:w-[35%] h-[100%] bg-white border-l-2 z-100 hidden transition-transform duration-500 ${
