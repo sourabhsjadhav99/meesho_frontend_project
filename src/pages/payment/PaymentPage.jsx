@@ -10,15 +10,28 @@ import { MdPayments, MdOutlinePayment } from "react-icons/md";
 import Swal from "sweetalert2";
 import { useSelector } from "react-redux";
 function PaymentPage() {
-  const cartItems = useSelector((state) => state.cart.items);
+  // const cartItems = useSelector((state) => state.cart.items);
   const {currentStep,setStep} = useAuth(); 
 
   const navigate = useNavigate();
+  const cartItems = useSelector((state) => state.cart.items);
+  const buyNowItems = useSelector((state) => state.cart.buyNowItem);
+  const isCart = useSelector((state) => state.cart.isCart);
 
-  const totalCost = cartItems.reduce(
-    (total, item) => total + parseInt(item.price * 50) * item.quantity,
-    0
-  );
+  let totalCost
+  if (isCart) {
+    totalCost = cartItems.reduce(
+      (total, item) => total + parseInt(item.price * 50) * item.quantity,
+      0
+    );
+  } else {
+    totalCost = buyNowItems.reduce(
+      (total, item) => total + parseInt(item.price * 50) * item.quantity,
+      0
+    );
+  }
+
+
   const [paymentMethod, setPaymentMethod] = useState("payNow");
 
   const handlePaymentMethodChange = (event) => {
@@ -126,9 +139,9 @@ function PaymentPage() {
         </div>
       </header>
       <div className="flex justify-center w-[100%] min-h-screen relative ">
-        <div className={`w-[60%] `}>
-          <div className={`flex justify-center w-[100%] gap-8`}>
-            <div className="w-[60%]">
+        <div className={`w-[100%] md:w-[60%] p-2`}>
+          <div className={`flex flex-col md:flex-row justify-center w-[100%] gap-8`}>
+            <div className="w-[100%] md:w-[60%]">
               <div className="flex flex-col gap-3 border-2 rounded  p-5">
                 <h3 className="text-2xl font-semibold flex gap-2 items-center justify-between">
                   <span>Select Payment Mode</span>
@@ -173,7 +186,7 @@ function PaymentPage() {
                 </div>
               </div>
             </div>
-            <div className="w-[40%] p-5 border-l-2 flex flex-col gap-3">
+            <div className="w-[100%] md:w-[40%]  p-5 md:border-l-2 flex flex-col gap-3">
               <h3 className="text-lg font-semibold">Price Details</h3>
               <div className="flex justify-between">
                 <div>

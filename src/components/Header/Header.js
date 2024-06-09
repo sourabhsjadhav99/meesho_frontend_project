@@ -43,7 +43,7 @@ const Navbar = () => {
   const location = useLocation();
   // console.log(location.pathname === "/signup");
   return (
-    <nav className="bg-white shadow">
+    <nav className="bg-white shadow mobile-margin" style={{zIndex:"200px"}}>
       <div className="max-w-7xl mx-auto ">
         <div className="relative flex items-center gap-5 h-16">
           <div className="flex items-center justify-between">
@@ -58,7 +58,7 @@ const Navbar = () => {
               <input
                 type="text"
                 placeholder="Try Saree, Kurti or Search by Product Code"
-                className="w-full px-4 py-2 border-neutral-950	 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                className="w-full search-desktop px-4 py-2 border-neutral-950	 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
                 onChange={handelchange}
                 value={search}
               />
@@ -132,7 +132,7 @@ const Navbar = () => {
                       Profile
                     </span>
                     {hoveredItem === "Profile" && (
-                      <div className="absolute  w-[250px] right-[-120px] bg-white shadow-lg rounded-lg py-2">
+                      <div className="absolute  w-[250px] right-[-120px] bg-white shadow-lg rounded-lg py-2" style={{zIndex:"200"}}>
                         <div className="px-4 py-2 text-gray-800 border-b">
                           <p className=" font-semibold text-xl">Hello User</p>
                           {isLoggedIn ? (
@@ -217,6 +217,13 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+      <input
+                type="text"
+                placeholder="Try Saree, Kurti or Search by Product Code"
+                className="w-full search-mobile px-4 py-2 border-neutral-950	 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                onChange={handelchange}
+                value={search}
+              />
       {location.pathname === "/" && (
         <div className="border h-[52px] my-auto mobilehidden">
           <div className=" max-w-7xl mx-auto">
@@ -281,9 +288,10 @@ const Navbar = () => {
                 )}
                 {hoveredItem === "Women Western" && (
                   <div
-                    className="absolute mt-2 w-[83%] bg-white shadow-lg rounded-lg flex"
+                    className="absolute mt-2 w-[83%]  bg-white shadow-lg rounded-lg flex"
                     //      onMouseEnter={() => handleMouseEnter("Women Ethnic")}
                     onMouseLeave={handleMouseLeave}
+                    style={{zIndex:"200"}}
                   >
                     {/* Dropdown items for Women Ethnic */}
                     <div>
@@ -339,6 +347,8 @@ const Navbar = () => {
                     className="absolute mt-2 w-[83%] bg-white shadow-lg rounded-lg flex"
                     //      onMouseEnter={() => handleMouseEnter("Women Ethnic")}
                     onMouseLeave={handleMouseLeave}
+                    style={{zIndex:"200"}}
+
                   >
                     {/* Dropdown items for Women Ethnic */}
                     <div>
@@ -380,6 +390,8 @@ const Navbar = () => {
                     className="absolute mt-2 w-[83%] bg-white shadow-lg rounded-lg flex"
                     //      onMouseEnter={() => handleMouseEnter("Women Ethnic")}
                     onMouseLeave={handleMouseLeave}
+                    style={{zIndex:"200"}}
+
                   >
                     {/* Dropdown items for Women Ethnic */}
                     <div>
@@ -421,6 +433,8 @@ const Navbar = () => {
                     className="absolute mt-2 w-[83%] bg-white shadow-lg rounded-lg flex"
                     //      onMouseEnter={() => handleMouseEnter("Women Ethnic")}
                     onMouseLeave={handleMouseLeave}
+                    style={{zIndex:"200"}}
+
                   >
                     {/* Dropdown items for Women Ethnic */}
                     <div>
@@ -466,6 +480,8 @@ const Navbar = () => {
                     className="absolute mt-2 w-[83%] bg-white shadow-lg rounded-lg flex"
                     //      onMouseEnter={() => handleMouseEnter("Women Ethnic")}
                     onMouseLeave={handleMouseLeave}
+                    style={{zIndex:"200"}}
+
                   >
                     {/* Dropdown items for Women Ethnic */}
                     <div>

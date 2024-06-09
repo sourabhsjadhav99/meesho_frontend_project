@@ -37,14 +37,16 @@ function ProductList() {
   return (
     <div className="flex justify-center w-full items-center flex-wrap ">
       {!loading ? (
-        <div className="flex  flex-wrap gap-6 w-full">
+        <div className="flex justify-center md:justify-start flex-wrap gap-2 md:gap-6 w-full">
           {data?.length > 0 ? (
             data?.map((item, index) => <ProductCard key={index} data={item} />)
           ) : (
             <div className="flex justify-center w-full">
               <h1 className="text-2xl  text-gray-500">
-                ------------------------------------- Sorry, Results not found!
-                -------------------------------------
+              <div className="hidden xl-block">  ------------------------------------- Sorry, Results not found!
+              -------------------------------------</div>
+              <div className="xl-hidden">   Sorry, Results not found!
+              </div>
               </h1>
             </div>
           )}

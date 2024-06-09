@@ -10,6 +10,7 @@ const Img = ({ src, className, ...rest }) => {
             effect="blur"
             src={src}
             {...rest}
+            style={{zIndex:"-1"}}
         />
     );
 };

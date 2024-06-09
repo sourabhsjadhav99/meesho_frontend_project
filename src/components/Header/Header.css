@@ -2,4 +2,31 @@
     .mobilehidden {
         display: none;
     }
+    .search-desktop{
+        display: none;
+    }
+    .mobile-margin{
+        margin: 0px 20px;
+
+    }
+    .cartheader{
+        display: flex;
+        flex-direction: column;
+        height: 120px;
+        gap: 0;
+    }
+    .progressmonile{
+        width: 70px;
+    }
+    .mobilelogo{
+        height: 30px;
+        width:100px;
+        margin-top: 2px;
+    }
+}
+@media screen and (min-width: 901px) {
+    .search-mobile{
+        display: none;
+    }
+    
 }

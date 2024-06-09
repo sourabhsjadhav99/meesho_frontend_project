@@ -50,14 +50,14 @@ function BuyNowPage() {
       </header>
       <div className="flex justify-center w-[100%] relative ">
         {buyNowFirst.length > 0 && (
-          <div className={`w-[60%] `}>
+          <div className={`w-[100%] md:w-[60%] p-2`}>
             <div
-              className={`flex justify-center w-[100%] gap-8 content-wrapper ${
+              className={`flex justify-center flex-col md:flex-row w-[100%] gap-8 content-wrapper ${
                 isOpenAddress || isOpenEdit ? "blurred" : ""
               }`}
             >
-              <div className="w-[60%]">
-                <div className="flex flex-col gap-3">
+              <div className="w-[100%] md:w-[60%]">
+                <div className="w-[100%] flex flex-col gap-3 ">
                   <h3 className="text-xl font-semibold">Product Details</h3>
                   {buyNowFirst.map((item) => (
                     <div key={item.id} className="border-2 rounded-lg">
@@ -127,7 +127,7 @@ function BuyNowPage() {
                   ))}
                 </div>
               </div>
-              <div className="w-[40%] p-5 border-l-2 flex flex-col gap-3">
+              <div className="w-[100%] md:w-[40%] p-5 md:border-l-2 flex flex-col gap-3">
                 <h3 className="text-lg font-semibold">Price Details</h3>
                 <div className="flex justify-between">
                   <div>
