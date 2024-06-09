@@ -49,9 +49,11 @@ const handleAddToCart = () => {
   // If the item is already in the cart, navigate to the cart page
   if (itemExists) {
     navigate("/cart");
+setStep(1)
   } else {
     // Dispatch the addToCart action with the product data
     dispatch(addToCart(data));
+    setStep(1)
 
     // Show a success toast message
     toast.success("Product added to cart", {
