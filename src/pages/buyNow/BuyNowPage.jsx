@@ -5,6 +5,10 @@ import safetyImg from "../../assets/safety.png";
 import AddressForm from "../../components/AddressForm";
 import EditSideBar from "../../components/EditSidebar";
 import meeshoLogo from "../../assets/meesho.png";
+import ProgressBar from "../cart/Progress";
+import { useAuth } from "../../components/signup/AuthContext";
+
+
 import { useSelector } from "react-redux";
 
 function BuyNowPage() {
@@ -29,16 +33,19 @@ function BuyNowPage() {
   const toggleEditSidebar = () => {
     setIsOpenEdit(!isOpenEdit);
   };
+  const {currentStep} = useAuth(); 
+
 
   return (
     <div className="flex flex-col gap-5">
       <header
-        className={`w-[100%] p-5 flex justify-center items-center  border-b-2  content-wrapper ${
+        className={`w-[100%]  flex justify-center items-center  border-b-2  content-wrapper ${
           isOpenAddress || isOpenEdit ? "blurred" : ""
         }`}
       >
-        <div className="w-[75%] ">
+        <div className="w-[75%] flex gap-[150px] items-center m-0 p-0">
           <Img src={meeshoLogo} className="w-[156px] h-[36px]" />
+          <ProgressBar currentStep={currentStep}/>
         </div>
       </header>
       <div className="flex justify-center w-[100%] relative ">

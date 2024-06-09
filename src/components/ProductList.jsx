@@ -32,7 +32,7 @@ function ProductList() {
   // }, [data]);
 
   useEffect(() => {
-    console.log(data); // Debugging line to check the fetched data
+    // console.log(data); // Debugging line to check the fetched data
   }, [data]);
   return (
     <div className="flex justify-center w-full items-center flex-wrap ">

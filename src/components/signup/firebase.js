@@ -2,13 +2,13 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDs7t-qul-h3e68vsohAlR7U_F4ScjBIE8",
-  authDomain: "hloy-af372.firebaseapp.com",
-  projectId: "hloy-af372",
-  storageBucket: "hloy-af372.appspot.com",
-  messagingSenderId: "672902489803",
-  appId: "1:672902489803:web:16943950db5c7a66f8dd4e",
-  measurementId: "G-ZN23CK1CXN"
+  apiKey: "AIzaSyDVDL6xLy-jNkNxeotolbKt49yDMhq-t1s",
+  authDomain: "testi-c59d8.firebaseapp.com",
+  projectId: "testi-c59d8",
+  storageBucket: "testi-c59d8.appspot.com",
+  messagingSenderId: "914471626708",
+  appId: "1:914471626708:web:5f2e260d6ae21a3c3b5841",
+  measurementId: "G-MSEGFTRDBG"
   };
 
 const app = initializeApp(firebaseConfig);

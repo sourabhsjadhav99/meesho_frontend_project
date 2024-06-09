@@ -3,12 +3,15 @@ import { FaRupeeSign } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Img from "../../components/Img";
 import meeshoLogo from "../../assets/meesho.png";
+import ProgressBar from "../cart/Progress";
+import { useAuth } from "../../components/signup/AuthContext";
 import { BsCash } from "react-icons/bs";
 import { MdPayments, MdOutlinePayment } from "react-icons/md";
 import Swal from "sweetalert2";
 import { useSelector } from "react-redux";
 function PaymentPage() {
   const cartItems = useSelector((state) => state.cart.items);
+  const {currentStep,setStep} = useAuth(); 
 
   const navigate = useNavigate();
 
@@ -26,6 +29,7 @@ function PaymentPage() {
     if (paymentMethod === "payNow") {
       handlePayment();
     } else {
+      setStep(3)
       await Swal.fire({
         position: "center",
         icon: "success",
@@ -33,6 +37,7 @@ function PaymentPage() {
         showConfirmButton: false,
         timer: 1500,
       });
+
       navigate("/summary");
     }
   };
@@ -71,7 +76,7 @@ function PaymentPage() {
         description: "Test Transaction",
         image: "path/to/meesho_logo.png", // Add your logo here
         handler:async function (response) {
-          console.log("Payment Success:", response);
+          // console.log("Payment Success:", response);
           await Swal.fire({
             position: "center",
             icon: "success",
@@ -95,11 +100,11 @@ function PaymentPage() {
       };
 
       const paymentObject = new window.Razorpay(options);
-      console.log(paymentObject);
+      // console.log(paymentObject);
       paymentObject.on("payment.failed", function (response) {
-        console.error("Payment Failed:", response.error);
+        // console.error("Payment Failed:", response.error);
         alert(`Payment failed! Reason: ${response.error.reason}`);
-        console.log("Navigating back to previous page...");
+        // console.log("Navigating back to previous page...");
         navigate("/cart");
       });
 
@@ -113,10 +118,11 @@ function PaymentPage() {
   return (
     <div className="flex flex-col gap-5">
       <header
-        className={`w-[100%] p-5 flex justify-center items-center  border-b-2`}
+        className={`w-[100%] flex justify-center items-center  border-b-2`}
       >
-        <div className="w-[75%] ">
+        <div className="w-[75%] flex gap-[150px] items-center m-0 p-0">
           <Img src={meeshoLogo} className="w-[156px] h-[36px]" />
+          <ProgressBar currentStep={currentStep}/>
         </div>
       </header>
       <div className="flex justify-center w-[100%] min-h-screen relative ">

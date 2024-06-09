@@ -3,20 +3,26 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Img from "../../components/Img";
 import meeshoLogo from "../../assets/meesho.png";
+import ProgressBar from "../cart/Progress";
+import { useAuth } from "../../components/signup/AuthContext";
 
 function Summary() {
   const cartItems = useSelector((state) => state.cart.items);
   const buyNowItems = useSelector((state) => state.cart.buyNowItem);
   const isCart = useSelector((state) => state.cart.isCart);
-  console.log(cartItems)
-console.log(buyNowItems)
-console.log(isCart)
+  
+  // console.log(cartItems)
+// console.log(buyNowItems)
+// console.log(isCart)
   let summaryItem;
   if (isCart) {
     summaryItem = cartItems;
   } else {
     summaryItem = buyNowItems;
   }
+  const {currentStep,setStep} = useAuth(); 
+  setStep(4)
+
 
   const address = JSON.parse(localStorage.getItem("address"));
   let navigate = useNavigate();
@@ -27,15 +33,19 @@ console.log(isCart)
 
   const handleShopMore = () => {
     navigate("/");
+    setStep(0)
+
+
   };
 
   return (
     <div>
       <header
-        className={`w-[100%] p-5 flex justify-center items-center  border-b-2`}
+        className={`w-[100%] flex justify-center items-center  border-b-2`}
       >
-        <div className="w-[75%] ">
+        <div className="w-[75%] flex gap-[150px] items-center m-0 p-0">
           <Img src={meeshoLogo} className="w-[156px] h-[36px]" />
+          <ProgressBar currentStep={currentStep}/>
         </div>
       </header>
 

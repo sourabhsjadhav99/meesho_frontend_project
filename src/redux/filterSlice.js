@@ -37,7 +37,7 @@ const filterSlice = createSlice({
     },
     togglePrices: (state, action) => {
       const prices = action.payload;
-      console.log(prices)
+      // console.log(prices)
       if (state.selectedPrices.includes(prices)) {
         state.selectedPrices = state.selectedPrices.filter(g => g !== prices);
       } else {

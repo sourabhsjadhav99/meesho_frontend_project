@@ -4,9 +4,12 @@ import { RxCross2 } from "react-icons/rx";
 import { useNavigate } from "react-router-dom";
 import { FaPhoneVolume, FaLocationDot } from "react-icons/fa6";
 import validationSchema from "../validations/addressValidation";
+import { useAuth } from "./signup/AuthContext";
 
 function AddressForm({ isOpenAddress, toggleAddressSidebar, onSave }) {
   const navigate = useNavigate();
+  const {setStep} = useAuth(); 
+
 
   const formik = useFormik({
     initialValues: {
@@ -21,6 +24,8 @@ function AddressForm({ isOpenAddress, toggleAddressSidebar, onSave }) {
     validationSchema,
     onSubmit: (values) => {
       localStorage.setItem("address", JSON.stringify(values));
+      setStep(2)
+      
 
       toggleAddressSidebar();
       navigate("/payment");

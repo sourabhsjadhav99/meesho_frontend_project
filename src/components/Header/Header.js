@@ -41,7 +41,7 @@ const Navbar = () => {
   };
 
   const location = useLocation();
-  console.log(location.pathname === "/signup");
+  // console.log(location.pathname === "/signup");
   return (
     <nav className="bg-white shadow">
       <div className="max-w-7xl mx-auto ">
@@ -222,7 +222,7 @@ const Navbar = () => {
           <div className=" max-w-7xl mx-auto">
             <div className="flex py-2  items-center justify-between">
               <div
-                className="text-gray-700 hover:text-gray-900"
+                className="text-gray-700 hover:text-gray-900 cursor-pointer"
 
                 //   onMouseLeave={handleMouseLeave}
               >
@@ -233,73 +233,35 @@ const Navbar = () => {
 
                 {hoveredItem === "Women Ethnic" && (
                   <div
-                    className="absolute mt-2 w-[83%] bg-white shadow-lg rounded-lg flex"
+                    className="absolute mt-2 w-[83%] bg-white shadow-lg rounded-lg flex pointer"
                     //      onMouseEnter={() => handleMouseEnter("Women Ethnic")}
                     onMouseLeave={handleMouseLeave}
                   >
                     {/* Dropdown items for Women Ethnic */}
-                    <div>
-                      <p className="text-fuchsia-800 px-3 font-bold">
-                        All Women Ethnic
-                      </p>
-                      <a
-                        href="/"
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                      >
-                        View All
-                      </a>
-                    </div>
+                   
 
                     <div>
                       <p className="text-fuchsia-800 px-3 font-bold">Sarees</p>
-                      <a
-                        href="/"
+                      <button
                         className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                        onClick={() => {
+                          dispatch(addMultipleCategories(["womens-dresses"]));
+                          navigate("/category");
+                        }}
                       >
                         All Sarees
-                      </a>
-                      <a
-                        href="/"
+                      </button>
+                      <button
                         className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                        onClick={() => {
+                          dispatch(addMultipleCategories(["womens-dresses"]));
+                          navigate("/category");
+                        }}
                       >
                         Silk Sarees
-                      </a>
-                      <a
-                        href="/"
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                      >
-                        Cotton Silk Sarees
-                      </a>
-                      <a
-                        href="/"
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                      >
-                        Cotton Sarees
-                      </a>
-                      <a
-                        href="/"
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                      >
-                        Georgette Sarees
-                      </a>
-                      <a
-                        href="/"
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                      >
-                        Chiffon Sarees
-                      </a>
-                      <a
-                        href="/"
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                      >
-                        Satin Sarees
-                      </a>
-                      <a
-                        href="/"
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                      >
-                        Embroidered Sarees
-                      </a>
+                      </button>
+                      
+                     
                     </div>
 
                     <div>
@@ -310,43 +272,9 @@ const Navbar = () => {
                       >
                         All Kurtis
                       </a>
-                      <a
-                        href="/"
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                      >
-                        Anarkali Kurtis
-                      </a>
-                      <a
-                        href="/"
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                      >
-                        Rayon Kurtis
-                      </a>
-                      <a
-                        href="/"
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                      >
-                        Cotton Kurtis
-                      </a>
-                      <a
-                        href="/"
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                      >
-                        Embroidered Kurtis
-                      </a>
+                      
                     </div>
-                    <div>
-                      <p className="text-fuchsia-800 px-3 font-bold	">
-                        {" "}
-                        Kurta Sets
-                      </p>
-                      <a
-                        href="/"
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                      >
-                        All Kurta Sets
-                      </a>
-                    </div>
+                    
 
                     {/* Add more items as needed */}
                   </div>
@@ -398,106 +326,10 @@ const Navbar = () => {
                       </button>
                     </div>
 
-                    <div>
-                      <p className="text-fuchsia-800 px-3 font-bold">Sarees</p>
-                      <button
-                        onClick={() => {
-                          dispatch(addMultipleCategories(["womens-dresses"]));
-                          navigate("/category");
-                        }}
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                      >
-                        All Sarees
-                      </button>
-                      <a
-                        href="/"
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                      >
-                        Silk Sarees
-                      </a>
-                      <a
-                        href="/"
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                      >
-                        Cotton Silk Sarees
-                      </a>
-                      <a
-                        href="/"
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                      >
-                        Cotton Sarees
-                      </a>
-                      <a
-                        href="/"
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                      >
-                        Georgette Sarees
-                      </a>
-                      <a
-                        href="/"
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                      >
-                        Chiffon Sarees
-                      </a>
-                      <a
-                        href="/"
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                      >
-                        Satin Sarees
-                      </a>
-                      <a
-                        href="/"
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                      >
-                        Embroidered Sarees
-                      </a>
-                    </div>
+                    
 
-                    <div>
-                      <p className="text-fuchsia-800 px-3 font-bold">Kurtis</p>
-                      <a
-                        href="/"
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                      >
-                        All Kurtis
-                      </a>
-                      <a
-                        href="/"
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                      >
-                        Anarkali Kurtis
-                      </a>
-                      <a
-                        href="/"
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                      >
-                        Rayon Kurtis
-                      </a>
-                      <a
-                        href="/"
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                      >
-                        Cotton Kurtis
-                      </a>
-                      <a
-                        href="/"
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                      >
-                        Embroidered Kurtis
-                      </a>
-                    </div>
-                    <div>
-                      <p className="text-fuchsia-800 px-3 font-bold	">
-                        {" "}
-                        Kurta Sets
-                      </p>
-                      <a
-                        href="/"
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                      >
-                        All Kurta Sets
-                      </a>
-                    </div>
+                 
+                    
 
                     {/* Add more items as needed */}
                   </div>
@@ -539,78 +371,9 @@ const Navbar = () => {
                       </button>
                     </div>
 
-                    <div>
-                      <p className="text-fuchsia-800 px-3 font-bold">
-                        Bottom wear
-                      </p>
-                      <a
-                        href="/"
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                      >
-                        track pant{" "}
-                      </a>
-                      <a
-                        href="/"
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                      >
-                        jeans{" "}
-                      </a>{" "}
-                      <a
-                        href="/"
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                      >
-                        traouser{" "}
-                      </a>
-                    </div>
+                   
 
-                    {/* <div>
-                    <p className="text-fuchsia-800 px-3 font-bold">Kurtis</p>
-                    <a
-                      href="/"
-                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                    >
-                      All Kurtis
-                    </a>
-                    <a
-                      href="/"
-                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                    >
-                      Anarkali Kurtis
-                    </a>
-                    <a
-                      href="/"
-                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                    >
-                      Rayon Kurtis
-                    </a>
-                    <a
-                      href="/"
-                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                    >
-                      Cotton Kurtis
-                    </a>
-                    <a
-                      href="/"
-                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                    >
-                      Embroidered Kurtis
-                    </a>
-                  </div>
-                  <div>
-                    <p className="text-fuchsia-800 px-3 font-bold	">
-                      {" "}
-                      Kurta Sets
-                    </p>
-                    <a
-                      href="/"
-                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                    >
-                      All Kurta Sets
-                    </a>
-                  </div> */}
-
-                    {/* Add more items as needed */}
-                  </div>
+                     </div>
                 )}
                 {hoveredItem === "Kids" && (
                   <div
@@ -649,78 +412,9 @@ const Navbar = () => {
                       </button>
                     </div>
 
-                    <div>
-                      <p className="text-fuchsia-800 px-3 font-bold">
-                        Bottom wear
-                      </p>
-                      <a
-                        href="/"
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                      >
-                        track pant{" "}
-                      </a>
-                      <a
-                        href="/"
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                      >
-                        jeans{" "}
-                      </a>{" "}
-                      <a
-                        href="/"
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                      >
-                        traouser{" "}
-                      </a>
-                    </div>
+                    
 
-                    {/* <div>
-                    <p className="text-fuchsia-800 px-3 font-bold">Kurtis</p>
-                    <a
-                      href="/"
-                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                    >
-                      All Kurtis
-                    </a>
-                    <a
-                      href="/"
-                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                    >
-                      Anarkali Kurtis
-                    </a>
-                    <a
-                      href="/"
-                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                    >
-                      Rayon Kurtis
-                    </a>
-                    <a
-                      href="/"
-                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                    >
-                      Cotton Kurtis
-                    </a>
-                    <a
-                      href="/"
-                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                    >
-                      Embroidered Kurtis
-                    </a>
-                  </div>
-                  <div>
-                    <p className="text-fuchsia-800 px-3 font-bold	">
-                      {" "}
-                      Kurta Sets
-                    </p>
-                    <a
-                      href="/"
-                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                    >
-                      All Kurta Sets
-                    </a>
-                  </div> */}
-
-                    {/* Add more items as needed */}
-                  </div>
+                                     </div>
                 )}
                 {hoveredItem === "Home" && (
                   <div
@@ -763,29 +457,7 @@ const Navbar = () => {
                       </button>
                     </div>
 
-                    <div>
-                      <p className="text-fuchsia-800 px-3 font-bold">
-                        Bottom wear
-                      </p>
-                      <a
-                        href="/"
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                      >
-                        track pant{" "}
-                      </a>
-                      <a
-                        href="/"
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                      >
-                        jeans{" "}
-                      </a>{" "}
-                      <a
-                        href="/"
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                      >
-                        traouser{" "}
-                      </a>
-                    </div>
+                  
 
                   </div>
                 )}
@@ -827,29 +499,7 @@ Men shoes                      </button>
                       </button>
                     </div>
 
-                    <div>
-                      <p className="text-fuchsia-800 px-3 font-bold">
-                        Bottom wear
-                      </p>
-                      <a
-                        href="/"
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                      >
-                        track pant{" "}
-                      </a>
-                      <a
-                        href="/"
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                      >
-                        jeans{" "}
-                      </a>{" "}
-                      <a
-                        href="/"
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                      >
-                        traouser{" "}
-                      </a>
-                    </div>
+                   
 
                   </div>
                 )}

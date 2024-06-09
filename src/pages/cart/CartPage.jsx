@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FaRupeeSign } from "react-icons/fa";
 import { removeFromCart } from "../../redux/cartSlice";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Navigate } from "react-router-dom";
 import { RxCross2 } from "react-icons/rx";
 import Img from "../../components/Img";
 import continueShoppingImg from "../../assets/continue_shopping.png";
@@ -12,6 +12,8 @@ import AddressForm from "../../components/AddressForm";
 import EditSideBar from "../../components/EditSidebar";
 import Swal from "sweetalert2";
 import ProgressBar from "./Progress";
+import { useAuth } from "../../components/signup/AuthContext";
+
 function CartPage() {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
@@ -60,8 +62,12 @@ function CartPage() {
   const toggleEditSidebar = () => {
     setIsOpenEdit(!isOpenEdit);
   };
+  const {isLoggedIn,currentStep} = useAuth(); 
 
 
+  if (!isLoggedIn) {
+    return <Navigate to="/signup" replace />;
+  }
 
   return (
     <div className="flex flex-col gap-5 min-h-screen">
@@ -72,7 +78,7 @@ function CartPage() {
       >
         <div className="w-[75%] flex gap-[150px] items-center m-0 p-0">
           <Img src={meeshoLogo} className="w-[156px] h-[36px]" />
-          <ProgressBar />
+          <ProgressBar currentStep={currentStep}/>
         </div>
       </header>
       <div className="flex justify-center w-[100%]  relative ">

@@ -18,7 +18,7 @@ import Footer from "../../components/Footer";
 
 function SingleProduct() {
   const { id } = useParams();
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn,setStep } = useAuth();
 
   const { data, loading } = useFetch(`/products/${id}`);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -32,8 +32,10 @@ function SingleProduct() {
     dispatch(setIsCart(true));
     if (itemExists) {
       navigate("/cart");
+      setStep(1)
     } else {
       dispatch(addToCart(data));
+      setStep(1)
       toast.success("Product added to cart", {
         position: "bottom-center",
         autoClose: 1500,
@@ -103,7 +105,7 @@ function SingleProduct() {
                   )}
                   <button
                     className="flex items-center justify-center gap-2 font-semibold text-lg w-[45%] bg-[#9F2089] p-2 rounded text-white"
-                    onClick={handleBuyNow}
+                    onClick={isLoggedIn?handleBuyNow:()=>navigate("/signup")}
                   >
                     <RxDoubleArrowRight />
                     Buy Now

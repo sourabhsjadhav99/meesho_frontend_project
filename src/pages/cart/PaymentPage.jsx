@@ -47,7 +47,7 @@ function PaymentPage() {
           description: "Test Transaction",
           image: meeshoLogo, // Add your logo here
           handler: function (response) {
-            console.log("Payment Success:", response);
+            // console.log("Payment Success:", response);
             alert(
               `Payment successful! Payment ID: ${response.razorpay_payment_id}`
             );
@@ -67,9 +67,9 @@ function PaymentPage() {
 
         const paymentObject = new window.Razorpay(options);
         paymentObject.on("payment.failed", function (response) {
-          console.error("Payment Failed:", response.error);
+          // console.error("Payment Failed:", response.error);
           alert(`Payment failed! Reason: ${response.error.reason}`);
-          console.log("Navigating back to previous page...");
+          // console.log("Navigating back to previous page...");
           navigate(-1);
         });
 

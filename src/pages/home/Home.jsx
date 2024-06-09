@@ -21,10 +21,10 @@ function Home() {
       
     <div className="flex flex-col gap-10">
       {/* <Navbar/> */}
-      <Cover />
-      <Categories />
+      {/* <Cover />
+      <Categories /> */}
       <SortingProducts />
-      <Footer />
+      {/* <Footer /> */}
     </div>
     </div>
   );
