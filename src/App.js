@@ -2,7 +2,7 @@ import React, { useEffect,useRef } from 'react';
 import './index.css'; // Ensure this import is present
 import Home from './pages/home/Home';
 import SingleProduct from './pages/product/SingleProduct';
-import Signup from './components/signup/signup';
+import Signup from './components/signup/Signup';
 import Footer from './components/Footer';
 import CartPage from './pages/cart/CartPage';
 import PaymentPage from './pages/payment/PaymentPage';
