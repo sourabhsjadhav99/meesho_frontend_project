@@ -261,7 +261,7 @@ const handleBuyNow = () => {
             </div>
           </div>
         ) : (
-          <div className="w-[100%] md:w-[70%] p-5 h-screen flex flex-col md:flex-row border border-red-600 gap-10  justify-between  ">
+          <div className="w-[100%] md:w-[70%] p-5 h-screen flex flex-col md:flex-row gap-10  justify-between  ">
             <div
               className={`w-full md:w-[45%] h-[70%] rounded-lg flex flex-col-reverse md:flex-row gap-10`}
             >
